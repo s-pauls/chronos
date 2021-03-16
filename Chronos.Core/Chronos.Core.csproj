@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Chronos.Data\Chronos.Data.csproj" />
+    <ProjectReference Include="..\Chronos.Domain\Chronos.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
