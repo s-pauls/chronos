@@ -1,0 +1,16 @@
+nav {
+    transition: 0.3s;
+}
+
+a:hover {
+    background: gainsboro;
+}
+
+.collapse-button:hover {
+    color: #0366d6;
+    cursor: pointer;
+}
+
+a {
+    height: 2.5em;
+}
