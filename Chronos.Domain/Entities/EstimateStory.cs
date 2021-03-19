@@ -6,6 +6,6 @@ namespace Chronos.Domain.Entities
     {
         public string Title { get; set; }
         public int Number { get; set; }
-        IEnumerable<EstimateTask> Tasks { get; set; }
+        public IEnumerable<EstimateTask> Tasks { get; set; }
     }
 }
