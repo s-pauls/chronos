@@ -1,7 +1,10 @@
-﻿namespace Chronos.Data
+﻿using System.Threading.Tasks;
+using Chronos.Domain.Entities;
+
+namespace Chronos.Data
 {
     public interface IAuditLogRepository
     {
-        void Add(int userId, string message);
+        Task AddLog(UserContext context, AuditLog auditLog);
     }
 }

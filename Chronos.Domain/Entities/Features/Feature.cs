@@ -1,4 +1,6 @@
-﻿namespace Chronos.Domain.Entities
+﻿using Chronos.Domain.Entities.Products;
+
+namespace Chronos.Domain.Entities.Features
 {
     public class Feature
     {

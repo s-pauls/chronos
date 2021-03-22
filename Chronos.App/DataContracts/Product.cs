@@ -1,6 +1,6 @@
-﻿namespace Chronos.Domain.Entities
+namespace Chronos.App.DataContracts
 {
-    public class Release
+    public class Product
     {
         public int Id { get; set; }
         public string Name { get; set; }

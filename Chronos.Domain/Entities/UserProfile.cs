@@ -7,9 +7,8 @@ namespace Chronos.Domain.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string FullName { get; set; }
-        public IEnumerable<UserRole> Roles { get; set; }
+        public List<UserRole> Roles { get; set; }
         public string CoherentEmail { get; set; }
         public string EvolutionEmail { get; set; }
-        public IEnumerable<Team> Teams { get; set; }
     }
 }

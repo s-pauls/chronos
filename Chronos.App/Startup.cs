@@ -28,7 +28,9 @@ namespace Chronos.App
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddChronosCore();
+            services
+                .AddChronosCore()
+                .AddChronosDbContext(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,7 +1,7 @@
-﻿using Chronos.Data;
-using Chronos.Domain;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Chronos.Domain.Entities;
+using Chronos.Data;
+using Chronos.Domain.Entities.Products;
 using Chronos.Domain.Interfaces;
 
 namespace Chronos.Core
@@ -9,21 +9,17 @@ namespace Chronos.Core
     public class ProductService : IProductService
     {
         private readonly IProductRepository _productRepository;
-        private readonly IAuditLogRepository _auditLogRepository;
 
         public ProductService(
-            IProductRepository productRepository,
-            IAuditLogRepository auditLogRepository)
+            IProductRepository productRepository)
         {
             _productRepository = productRepository;
-            _auditLogRepository = auditLogRepository;
         }
 
-        public async Task<int> AddProduct(Product product)
+        public async Task<List<Product>> GetProducts(ProductFilter filter)
         {
-            var productId = await _productRepository.AddProduct(product);
-            _auditLogRepository.Add(userId: 3, $"{product.Name} was added");
-            return productId;
+            return await _productRepository.GetProducts(filter);
         }
+
     }
 }
