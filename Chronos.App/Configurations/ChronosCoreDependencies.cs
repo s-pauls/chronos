@@ -16,7 +16,8 @@ namespace Chronos.App.Configurations
             services
                 .AddScoped<IProductService, ProductService>()
                 .AddScoped<IProductRepository, ProductRepository>()
-                .AddScoped<IAuditLogRepository, AuditLogRepository>();
+                .AddScoped<IAuditLogRepository, AuditLogRepository>()
+                .AddScoped<IWorkItemService, WorkItemService>();
 
             return services;
         }

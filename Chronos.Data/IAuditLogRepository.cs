@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Chronos.Domain.Entities;
+using Chronos.Domain.Entities.User;
 
 namespace Chronos.Data
 {

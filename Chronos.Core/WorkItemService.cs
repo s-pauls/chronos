@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Chronos.Domain.Entities.Azure;
-using Chronos.Domain.Entities;
+using Chronos.Domain.Entities.Blank;
+using Chronos.Domain.Entities.Features;
+using Chronos.Domain.Entities.Rules;
 using Chronos.Domain.Interfaces;
 
 namespace Chronos.Core
@@ -10,7 +11,7 @@ namespace Chronos.Core
     public class WorkItemService : IWorkItemService
     {
         private readonly IAzureWorkItemClient _client;
-        
+
         public WorkItemService(IAzureWorkItemClient client)
         {
             _client = client;
@@ -20,7 +21,7 @@ namespace Chronos.Core
         {
             // get from Database
             var internalFeature = new Feature();
-            
+
             var azureFeature = await _client.GetAzureWorkItemAsync(internalFeature.ExternalId, settings);
 
             var tasks = new List<Task>();
@@ -43,7 +44,7 @@ namespace Chronos.Core
 
             if (blankFeature.Stories != null)
             {
-                foreach (var blankStory in blankFeature.Stories) 
+                foreach (var blankStory in blankFeature.Stories)
                 {
                     tasks.Add(CreateStoryAsync(internalFeature, blankStory, featureRules.StoryRules, featureRules.TaskRules, azureFeature, settings));
                 }
@@ -53,23 +54,17 @@ namespace Chronos.Core
         }
 
         private async Task<AzureWorkItem> CreateFeatureTaskAsync(
-            Feature feature, 
+            Feature feature,
             BlankTask blankTask,
-            TaskRules taskRules, 
+            TaskRules taskRules,
             int taskOrderNumber,
             AzureWorkItem azureFeature,
             AzureSettings settings)
         {
             var azureTask = new AzureTask
             {
-                Title = new StringBuilder(taskRules.Title)
-                    .Replace("[Feature]", feature.FeatureCode)
-                    .Replace("[Product]", feature.Product.Name)
-                    .Replace("[Activity]", blankTask.Activity)
-                    .Replace("[TaskOrderNumber]", taskOrderNumber.ToString())
-                    .Replace("[EstimateItemTitle]", blankTask.Name)
-                    .ToString(),
-                
+                Title = new TitleComposer().ComposeTaskTitle(taskRules.Title, feature, blankTask, taskOrderNumber, null, null),
+
                 ParentUrl = azureFeature.Url,
                 Description = taskRules.Description,
                 Tags = taskRules.Tags,
@@ -80,22 +75,16 @@ namespace Chronos.Core
         }
 
         private async Task CreateStoryAsync(
-            Feature feature, 
+            Feature feature,
             BlankStory blankStory,
-            StoryRules storyRules, 
+            StoryRules storyRules,
             TaskRules taskRules,
             AzureWorkItem azureFeature,
             AzureSettings settings)
         {
             var azureStory = new AzureStory
             {
-                Title = new StringBuilder(storyRules.Title)
-                    .Replace("[Feature]", feature.FeatureCode)
-                    .Replace("[Product]", feature.Product.Name)
-                    .Replace("[StoryOrderNumber]", blankStory.OrderNumber.ToString())
-                    .Replace("[EstimateItemTitle]", blankStory.Name)
-                    .ToString(),
-                
+                Title = new TitleComposer().ComposeStoryTitle(storyRules.Title, feature, blankStory),
                 ParentUrl = azureFeature.Url,
                 Area = azureFeature.Area,
                 Iteration = azureFeature.Iteration,
@@ -104,17 +93,17 @@ namespace Chronos.Core
                 Tags = storyRules.Tags
             };
 
-            var createdStory = await _client.CreateUserStoryAsync(azureStory, settings);
+            azureStory.Id = (await _client.CreateUserStoryAsync(azureStory, settings)).Id;
 
             var tasks = new List<Task>();
-            
+
             if (blankStory.Tasks != null)
             {
                 var taskOrderNumber = 1;
 
                 foreach (var task in blankStory.Tasks)
                 {
-                    tasks.Add(CreateStoryTaskAsync(feature, task, blankStory, taskRules, taskOrderNumber, createdStory, settings));
+                    tasks.Add(CreateStoryTaskAsync(feature, task, blankStory, taskRules, taskOrderNumber, azureStory, settings));
                     taskOrderNumber++;
                 }
             }
@@ -123,26 +112,18 @@ namespace Chronos.Core
         }
 
         private async Task<AzureWorkItem> CreateStoryTaskAsync(
-            Feature feature, 
-            BlankTask blankTask, 
+            Feature feature,
+            BlankTask blankTask,
             BlankStory blankStory,
-            TaskRules taskRules, 
+            TaskRules taskRules,
             int taskOrderNumber,
-            AzureWorkItem azureStory,
+            AzureStory azureStory,
             AzureSettings settings)
         {
             var azureTask = new AzureTask
             {
-                Title = new StringBuilder(taskRules.Title) //story.TaskRules.Title)
-                    .Replace("[Feature]", feature.FeatureCode)
-                    .Replace("[Product]", feature.Product.Name)
-                    .Replace("[Activity]", blankTask.Activity)
-                    .Replace("[StoryId]", azureStory.Id.ToString())
-                    .Replace("[StoryOrderNumber]", blankStory.OrderNumber.ToString())
-                    .Replace("[TaskOrderNumber]", taskOrderNumber.ToString())
-                    .Replace("[EstimateItemTitle]", blankTask.Name)
-                    .ToString(),
-                
+                Title = new TitleComposer().ComposeTaskTitle(taskRules.Title, feature, blankTask, taskOrderNumber, blankStory, azureStory),
+
                 ParentUrl = azureStory.Url,
                 Area = azureStory.Area,
                 Iteration = azureStory.Iteration,

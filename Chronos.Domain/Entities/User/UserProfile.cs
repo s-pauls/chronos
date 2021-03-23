@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using Chronos.Domain.Enums;
 
-namespace Chronos.Domain.Entities
+namespace Chronos.Domain.Entities.User
 {
     public class UserProfile
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Chronos.Domain.Entities.Features;
 
-namespace Chronos.Domain.Entities
+namespace Chronos.Domain.Entities.Estimate
 {
     public class Estimate
     {

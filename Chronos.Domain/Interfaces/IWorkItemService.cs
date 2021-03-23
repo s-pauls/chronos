@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Chronos.Domain.Entities.Azure;
-using Chronos.Domain.Entities;
+using Chronos.Domain.Entities.Blank;
+using Chronos.Domain.Entities.Rules;
 
 namespace Chronos.Domain.Interfaces
 {

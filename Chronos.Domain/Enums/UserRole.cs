@@ -1,4 +1,4 @@
-﻿namespace Chronos.Domain.Entities
+﻿namespace Chronos.Domain.Enums
 {
     public enum UserRole
     {

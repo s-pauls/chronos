@@ -45,6 +45,28 @@ namespace Chronos.Core.Microsoft.AzureDevOps.Extensions
 
             return azureWorkItem;
         }
+        
+        public static AzureStory ToAzureStory(this WorkItem workItem)
+        {
+            var azureWorkItem = workItem.ToAzureWorkItem();
+
+            if (azureWorkItem.Type == AzureWorkItemType.UserStory)
+            {
+                return new AzureStory
+                {
+                    Id = azureWorkItem.Id,
+                    Type = azureWorkItem.Type,
+                    Title = azureWorkItem.Title,
+                    Area = azureWorkItem.Area,
+                    Iteration = azureWorkItem.Iteration,
+                    Url = azureWorkItem.Url,
+                    ParentUrl = azureWorkItem.ParentUrl,
+                    Tags = azureWorkItem.Tags
+                };
+            }
+
+            return null;
+        }
 
         public static AzureTask ToAzureTask(this WorkItem workItem)
         {

@@ -1,4 +1,4 @@
-﻿namespace Chronos.Domain.Entities
+﻿namespace Chronos.Domain.Entities.Estimate
 {
     public class EstimateTask
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Chronos.Domain.Entities
+namespace Chronos.Domain.Entities.Blank
 {
     public class BlankFeature
     {

@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace Chronos.Domain.Entities
+namespace Chronos.Domain.Entities.Rules
 {
-    public class StoryRules
+    public class TaskRules
     {
         public string Title { get; set; }
 
         public string Description { get; set; }
-        
-        public string AcceptanceCriteria { get; set; }
 
         public List<string> Tags { get; set; }
     }

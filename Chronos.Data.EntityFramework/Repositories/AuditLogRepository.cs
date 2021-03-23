@@ -1,6 +1,7 @@
-﻿using Chronos.Data.EntityFramework.Entities;
+﻿using System.Threading.Tasks;
+using Chronos.Data.EntityFramework.Entities;
 using Chronos.Domain.Entities;
-using System.Threading.Tasks;
+using Chronos.Domain.Entities.User;
 
 namespace Chronos.Data.EntityFramework.Repositories
 {
