@@ -6,6 +6,7 @@ using Chronos.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Chronos.Core.Microsoft.AzureDevOps;
 
 namespace Chronos.App.Configurations
 {
@@ -17,7 +18,8 @@ namespace Chronos.App.Configurations
                 .AddScoped<IProductService, ProductService>()
                 .AddScoped<IProductRepository, ProductRepository>()
                 .AddScoped<IAuditLogRepository, AuditLogRepository>()
-                .AddScoped<IWorkItemService, WorkItemService>();
+                .AddScoped<IWorkItemService, WorkItemService>()
+                .AddScoped<IAzureWorkItemClient, AzureWorkItemClient>();
 
             return services;
         }
@@ -27,6 +29,8 @@ namespace Chronos.App.Configurations
             var connectionString = configuration.GetConnectionString("ChronosDbConnection");
             services.AddDbContext<ChronosDbContext>(options =>
                 options.UseSqlServer(connectionString));
+
+            services.AddHttpClient<IUserService, UserService>();
 
             return services;
         }

@@ -1,0 +1,28 @@
+<p>
+  A personal access token (PAT) is used as an alternate password and required to authenticate into Azure DevOps.
+</p>
+
+<div class="alert alert-warning" role="alert">
+Please follow the <a rel="noopener noreferrer" href="https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=preview-page#create-a-pat" target="_blank">instructions</a> to create a PAT.
+Grant read permissions for scopes you allow and set the lifetime you prefer.
+Please make sure that you've selected "All accessible organizations" for Organization field.
+</div>
+<p>
+  Once you're ready, please enter the token in the field below. It will be securely stored in the cookies.
+</p>
+
+<div *ngIf="error" class="alert alert-danger" role="alert">
+  {{error}}
+</div>
+<form [formGroup]="tokenForm" (ngSubmit)="onSubmit()">
+  <div class="form-group col-6">
+      <label for="accessToken">Access Token <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" formControlName="accessToken" id="accessToken" aria-describedby="accessToken" placeholder="Enter Access Token">
+      <div *ngIf="accessToken.invalid && (accessToken.dirty || accessToken.touched)">
+          <small *ngIf="accessToken.errors.required" class="form-text text-danger">Token is required.</small>
+      </div>
+      <label for="expiration">Expiration</label>
+      <input type="text" class="form-control" formControlName="expiration" id="expiration" aria-describedby="expiration" placeholder="Enter Expiration in MM/dd/yyyy format">
+  </div>
+  <button class="btn btn-primary" type="submit" [disabled]="!tokenForm.valid">Submit</button>
+</form>
