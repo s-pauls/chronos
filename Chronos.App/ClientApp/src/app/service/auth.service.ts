@@ -35,13 +35,13 @@ export class AuthService {
     );
   }
 
-  singIn(token: Token) {
+  singIn(token: Token): Observable<User> {
     this.currentUser = null;
     this.userSubject.next(this.currentUser);
-    return this.http.post(`${this.apiUrl}/signin`, token);
+    return this.http.post<User>(`${this.apiUrl}/signin`, token);
   }
 
-  signOut() {
+  signOut(): Observable<any> {
     this.currentUser = null;
     this.userSubject.next(this.currentUser);
     return this.http.post(`${this.apiUrl}/signout`, {});
