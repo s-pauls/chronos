@@ -3,12 +3,14 @@ using System.Threading.Tasks;
 using Chronos.App.DataContracts;
 using Chronos.Domain.Entities.Products;
 using Chronos.Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Chronos.App.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
+    [Authorize]
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;

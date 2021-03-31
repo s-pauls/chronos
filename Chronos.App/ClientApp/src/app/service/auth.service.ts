@@ -2,15 +2,22 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AppConfigService } from './app-config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private apiUrl = '';
   private currentUser: User;
   private userSubject = new Subject<User>();
   user$ = this.userSubject.asObservable();
-  constructor(private http: HttpClient) {
+
+
+  constructor(private config: AppConfigService,
+              private http: HttpClient
+  ) {
+    this.apiUrl = `${config.getData('apiEndpoint')}/user`;
   }
 
   user(): Observable<User> {
@@ -18,7 +25,7 @@ export class AuthService {
       return of<User>(this.currentUser);
     }
 
-    return this.http.get<User>('/api/user/user')
+    return this.http.get<User>(this.apiUrl)
     .pipe(
       map(user => {
         this.currentUser = user;
@@ -31,13 +38,13 @@ export class AuthService {
   singIn(token: Token) {
     this.currentUser = null;
     this.userSubject.next(this.currentUser);
-    return this.http.post('/api/user/user/signin', token);
+    return this.http.post(`${this.apiUrl}/signin`, token);
   }
 
   signOut() {
     this.currentUser = null;
     this.userSubject.next(this.currentUser);
-    return this.http.post('/api/user/user/signout', {});
+    return this.http.post(`${this.apiUrl}/signout`, {});
   }
 }
 

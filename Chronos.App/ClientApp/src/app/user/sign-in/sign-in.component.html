@@ -15,7 +15,7 @@ Please make sure that you've selected "All accessible organizations" for Organiz
   {{error}}
 </div>
 <form [formGroup]="tokenForm" (ngSubmit)="onSubmit()">
-  <div class="form-group col-6">
+  <div class="form-group col-8">
       <label for="accessToken">Access Token <span class="text-danger">*</span></label>
       <input type="text" class="form-control" formControlName="accessToken" id="accessToken" aria-describedby="accessToken" placeholder="Enter Access Token">
       <div *ngIf="accessToken.invalid && (accessToken.dirty || accessToken.touched)">

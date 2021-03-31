@@ -1,23 +1,29 @@
-import { Component, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnDestroy } from '@angular/core';
+import { ProductService } from '../service';
+import { Product } from '../models/Product';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-fetch-data',
   templateUrl: './fetch-data.component.html'
 })
-export class FetchDataComponent {
-  public forecasts: WeatherForecast[];
+export class FetchDataComponent implements OnDestroy {
+  private destroy: Subject<void> = new Subject<void>();
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<WeatherForecast[]>(baseUrl + 'weatherforecast').subscribe(result => {
-      this.forecasts = result;
-    }, error => console.error(error));
+  public products: Product[];
+
+  constructor(private productService: ProductService) {
+    productService.getProducts()
+      .pipe(takeUntil(this.destroy))
+      .subscribe(result => {
+        this.products = result;
+      }, 
+      error => console.error(error));
   }
-}
 
-interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
+  ngOnDestroy(): void {
+    this.destroy.next();
+    this.destroy.complete();
+  }
 }

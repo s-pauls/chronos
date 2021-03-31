@@ -32,7 +32,7 @@ namespace Chronos.App.Controllers
             _userService = userService;
         }
 
-        [HttpGet("user")]
+        [HttpGet]
         [AllowAnonymous]
         public async Task<User> GetUser()
         {
@@ -54,7 +54,7 @@ namespace Chronos.App.Controllers
         }
 
 
-        [HttpPost("user/signin")]
+        [HttpPost("signin")]
         [AllowAnonymous]
         public async Task<IActionResult> SignIn([FromBody] Token token)
         {
@@ -97,7 +97,7 @@ namespace Chronos.App.Controllers
             }
         }
 
-        [HttpPost("user/signout")]
+        [HttpPost("signout")]
         public async Task<IActionResult> SignOut()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
