@@ -1,16 +1,14 @@
 <p *ngIf="!products"><em>Loading...</em></p>
 
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="products">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let product of products">
-      <td>{{ product.id }}</td>
-      <td>{{ product.name }}</td>
-    </tr>
-  </tbody>
-</table>
+<div>
+  <ngx-datatable
+    class="material"
+    [rows]="products" 
+    [columns]="columns"
+    [columnMode]="columnMode.force"
+    [headerHeight]="50"
+    [rowHeight]="auto"
+    [footerHeight]="50"  
+    [limit]="pageLimit">
+  </ngx-datatable>
+</div>

@@ -3,6 +3,7 @@ import { ProductService } from '../service';
 import { Product } from '../models/Product';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { ColumnMode } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'app-fetch-data',
@@ -10,8 +11,21 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class FetchDataComponent implements OnDestroy {
   private destroy: Subject<void> = new Subject<void>();
+  
+  columnMode = ColumnMode;
 
-  public products: Product[];
+  products: Product[] = null;
+  pageLimit = 5;
+  columns = [
+    { 
+      prop: 'id',
+      name: 'Id'
+    }, 
+    { 
+      prop: 'name',
+      name: 'Name'
+    }
+  ];
 
   constructor(private productService: ProductService) {
     productService.getProducts()

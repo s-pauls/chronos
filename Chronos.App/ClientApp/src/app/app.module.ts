@@ -25,6 +25,7 @@ import { TagsComponent } from './tags/tags.component';
 import { FeatureRulesComponent } from './rules/feature-rules/feature-rules.component';
 import { StoryRulesComponent } from './rules/story-rules/story-rules.component';
 import { TaskRulesComponent } from './rules/task-rules/task-rules.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { TaskRulesComponent } from './rules/task-rules/task-rules.component';
         ]
       }
     }),
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    NgxDatatableModule
   ],
   providers: [
     {

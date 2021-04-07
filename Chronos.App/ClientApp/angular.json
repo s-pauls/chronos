@@ -27,6 +27,8 @@
               "node_modules/quill/dist/quill.bubble.css",
               "node_modules/quill/dist/quill.snow.css",
               "node_modules/ngx-toastr/toastr.css",
+              "node_modules/@swimlane/ngx-datatable/themes/material.css",
+              "node_modules/@swimlane/ngx-datatable/assets/icons.css",
               "src/styles.css"  
             ],
             "scripts": []
