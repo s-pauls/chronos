@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
+import { QuillModule } from 'ngx-quill';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { AppComponent } from './app.component';
 import { AuthenticatedGuard } from './guard/authenticated.guard';
@@ -19,6 +21,10 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { AppConfigService } from './service';
 import { ToastrHttpInterceptorService } from './service/toastr-http-interceptor.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TagsComponent } from './tags/tags.component';
+import { FeatureRulesComponent } from './rules/feature-rules/feature-rules.component';
+import { StoryRulesComponent } from './rules/story-rules/story-rules.component';
+import { TaskRulesComponent } from './rules/task-rules/task-rules.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +37,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SignInComponent,
     SignOutComponent,
     LoginLayoutComponent,
-    MainLayoutComponent
+    MainLayoutComponent,
+    FeatureRulesComponent,    
+    TagsComponent,
+    StoryRulesComponent,
+    TaskRulesComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -45,6 +55,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         { path: 'User/SignOut', component: SignOutComponent, pathMatch: 'full'},
         { path: 'counter', component: CounterComponent},
         { path: 'fetch-data', component: FetchDataComponent},
+        { path: 'feature-rules', component: FeatureRulesComponent}
       ]},
       { path: '', component: LoginLayoutComponent, children: [
         { path: 'User/SignIn', component: SignInComponent }
@@ -53,6 +64,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
     }),
+    QuillModule.forRoot({
+      modules: {
+        toolbar: [
+          ['bold', 'italic', 'underline'],
+          [{ 'list': 'ordered'}, { 'list': 'bullet' }],          
+          [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+          [{ 'color': [] }, { 'background': [] }],
+          ['link']
+        ]
+      }
+    }),
+    BsDropdownModule.forRoot()
   ],
   providers: [
     {

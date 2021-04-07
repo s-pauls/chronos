@@ -1,0 +1,23 @@
+<div id="tags">
+    <div class="d-flex flex-wrap align-content-around">        
+        <div *ngFor="let tag of tags">
+            <button class="btn btn-success mr-2 mb-2" type="button" (click)="onRemoveTag($event.target)">{{ tag }}</button>                    
+        </div>        
+        <div *ngIf="showInput">            
+            <div class="input-group mb-2">
+                <input #input [(ngModel)]="inputValue" type="text" class="form-control" (keyup.enter)="onEnter()">
+                <div dropdown class="input-group-append" [isDisabled]="!(defaultTags && defaultTags.length)">
+                    <button dropdownToggle type="button" class="btn btn-outline-secondary dropdown-toggle"></button>
+                    <ul *dropdownMenu class="dropdown-menu dropdown-menu-right">
+                        <li *ngFor="let tag of defaultTags">
+                            <span class="dropdown-item" (click)="onSelection($event.target)">{{ tag }}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!showInput">
+            <button class="btn btn-primary mb-2" type="button" (click)="onAddTag()">Add Tag</button>
+        </div>
+    </div>
+</div>

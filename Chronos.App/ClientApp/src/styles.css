@@ -18,6 +18,7 @@ code {
 html, body {
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
 
 .separator {
@@ -28,4 +29,30 @@ html, body {
 
 svg {
   display: block;
+}
+
+.rule-name-title {
+  color: deepskyblue;
+}
+
+.variable-title {
+  color: darkcyan;
+}
+
+.ql-toolbar {
+  border-top-left-radius: 0.75em;
+  border-top-right-radius: 0.75em;
+}
+
+.ql-editor {
+  min-height: 15em;
+}
+
+.ql-container {
+  border-bottom-left-radius: 0.75em;
+  border-bottom-right-radius: 0.75em;
+}
+
+.ql-container {
+  font-size: 1em;
 }

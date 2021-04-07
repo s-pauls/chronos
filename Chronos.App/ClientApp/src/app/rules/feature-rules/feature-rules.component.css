@@ -1,0 +1,7 @@
+.rules-header {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 1000;
+    margin-bottom: 1em;
+}

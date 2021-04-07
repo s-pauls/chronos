@@ -1,0 +1,29 @@
+<div id="taskRules" class="border rounded p-1 mb-3">
+    <label class="rule-name-title mb-0">{{ title }}</label>
+    <div class="p-3">
+        <div class="mb-1">
+            <label for="taskTitle">Title</label>
+            <input class="form-control" id="taskTitle" type="text" [(ngModel)]="taskRules.title" />
+        </div>
+        <div class="mb-3" *ngIf="taskRules.titleVariables.length > 0">
+            <div>You can use the following variables:</div>
+            <div *ngFor="let variable of taskRules.titleVariables">
+                <div class="variable-title">
+                    {{ variable.code }} - {{ variable.description }}
+                </div>                    
+            </div>
+        </div>
+        <div class="mb-3">
+            <label>Descripton</label>
+            <quill-editor [(ngModel)]="taskRules.description"></quill-editor>
+        </div>
+        <div>
+            <div>
+                <label>Tags</label>
+            </div>
+            <div>
+                <app-tags [tags]="taskRules.tags" [defaultTags]="taskRules.defaultTags"></app-tags>
+            </div>                    
+        </div>
+    </div>
+</div>

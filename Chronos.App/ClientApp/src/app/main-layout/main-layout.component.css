@@ -1,0 +1,7 @@
+.main-container {
+    overflow: hidden;
+}
+
+.router-container {
+    overflow: auto;
+}
