@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Chronos.Domain.Entities.Azure;
 using Chronos.Domain.Entities.Blank;
+using Chronos.Domain.Entities.FeatureRules;
 using Chronos.Domain.Entities.Features;
-using Chronos.Domain.Entities.Rules;
 using Chronos.Domain.Interfaces;
 
 namespace Chronos.Core
@@ -61,13 +62,15 @@ namespace Chronos.Core
             AzureWorkItem azureFeature,
             AzureSettings settings)
         {
+            var composer = new TitleComposer();
+
             var azureTask = new AzureTask
             {
-                Title = new TitleComposer().ComposeTaskTitle(taskRules.Title, feature, blankTask, taskOrderNumber, null, null),
+                Title = composer.ComposeTaskTitle(taskRules.Title, feature, blankTask, taskOrderNumber, null, null),
 
                 ParentUrl = azureFeature.Url,
                 Description = taskRules.Description,
-                Tags = taskRules.Tags,
+                Tags = taskRules.Tags.Select(tagTemplate => composer.ComposeTag(tagTemplate, feature)).ToList(),
                 OriginalEstimate = blankTask.OriginalEstimate
             };
 
@@ -82,15 +85,17 @@ namespace Chronos.Core
             AzureWorkItem azureFeature,
             AzureSettings settings)
         {
+            var composer = new TitleComposer();
+
             var azureStory = new AzureStory
             {
-                Title = new TitleComposer().ComposeStoryTitle(storyRules.Title, feature, blankStory),
+                Title = composer.ComposeStoryTitle(storyRules.Title, feature, blankStory),
                 ParentUrl = azureFeature.Url,
                 Area = azureFeature.Area,
                 Iteration = azureFeature.Iteration,
                 Description = storyRules.Description,
                 AcceptanceCriteria = storyRules.AcceptanceCriteria,
-                Tags = storyRules.Tags
+                Tags = storyRules.Tags.Select(tagTemplate => composer.ComposeTag(tagTemplate, feature)).ToList(),
             };
 
             azureStory.Id = (await _client.CreateUserStoryAsync(azureStory, settings)).Id;
@@ -120,57 +125,20 @@ namespace Chronos.Core
             AzureStory azureStory,
             AzureSettings settings)
         {
+            var composer = new TitleComposer();
+
             var azureTask = new AzureTask
             {
-                Title = new TitleComposer().ComposeTaskTitle(taskRules.Title, feature, blankTask, taskOrderNumber, blankStory, azureStory),
-
+                Title = composer.ComposeTaskTitle(taskRules.Title, feature, blankTask, taskOrderNumber, blankStory, azureStory),
                 ParentUrl = azureStory.Url,
                 Area = azureStory.Area,
                 Iteration = azureStory.Iteration,
                 Description = taskRules.Description,
-                Tags = taskRules.Tags,
+                Tags = taskRules.Tags.Select(tagTemplate => composer.ComposeTag(tagTemplate, feature)).ToList(),
                 OriginalEstimate = blankTask.OriginalEstimate
             };
 
             return await _client.CreateTaskAsync(azureTask, settings);
-        }
-
-        private string GetStoryDescription()
-        {
-            return "<div>" +
-                        "<div>As</div>" +
-                        "<div>I Want</div>" +
-                        "<div>So that</div>" +
-                        "<br/>" +
-                        "<div>" +
-                            "<b>Additional Information</b>" +
-                        "</div>" +
-                        "<div>None</div>" +
-                        "<br/>" +
-                        "<div>" +
-                            "<b>Glossary</b>" +
-                        "</div>" +
-                        "<div>None</div>" +
-                   "</div>";
-        }
-
-        private string GetStoryAcceptanceCriteria()
-        {
-            return "<div>" +
-                        "<div>" +
-                            "<b>Assumptions & Limitations & Dependencies </b>" +
-                        "</div>" +
-                        "<div>None</div>" +
-                        "<br/>" +
-                        "<div>" +
-                            "<b>Acceptance Criteria</b>" +
-                        "</div>" +
-                        "<br/>" +
-                        "<div>" +
-                            "<b>Implementation Details</b>" +
-                        "</div>" +
-                        "<div>None</div>" +
-                   "</div>";
         }
     }
 }

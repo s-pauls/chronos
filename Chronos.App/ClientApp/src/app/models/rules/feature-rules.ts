@@ -2,7 +2,7 @@ import { StoryRules } from "./story-rules";
 import { TaskRules } from "./task-rules";
 
 export class FeatureRules {
-    templateName = '';
+    name = '';
     zeroStoryRules: StoryRules = null;
     zeroTaskRules: TaskRules = null;
     featureTaskRules: TaskRules = null;

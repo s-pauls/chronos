@@ -11,17 +11,17 @@ import { ColumnMode } from '@swimlane/ngx-datatable';
 })
 export class FetchDataComponent implements OnDestroy {
   private destroy: Subject<void> = new Subject<void>();
-  
+
   columnMode = ColumnMode;
 
   products: Product[] = null;
   pageLimit = 5;
   columns = [
-    { 
+    {
       prop: 'id',
       name: 'Id'
-    }, 
-    { 
+    },
+    {
       prop: 'name',
       name: 'Name'
     }
@@ -32,8 +32,7 @@ export class FetchDataComponent implements OnDestroy {
       .pipe(takeUntil(this.destroy))
       .subscribe(result => {
         this.products = result;
-      }, 
-      error => console.error(error));
+      });
   }
 
   ngOnDestroy(): void {

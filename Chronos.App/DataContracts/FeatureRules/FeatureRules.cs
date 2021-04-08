@@ -1,15 +1,12 @@
-﻿namespace Chronos.Domain.Entities.Rules
+﻿namespace Chronos.App.DataContracts.FeatureRules
 {
     public class FeatureRules
     {
-        public StoryRules ZeroStoryRules { get; set; }
-
-        public TaskRules ZeroTaskRules { get; set; }
-
+        public string Name { get; set; }
         public TaskRules FeatureTaskRules { get; set; }
-
+        public StoryRules ZeroStoryRules { get; set; }
+        public TaskRules ZeroTaskRules { get; set; }
         public StoryRules StoryRules { get; set; }
-        
         public TaskRules TaskRules { get; set; }
     }
 }

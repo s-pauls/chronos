@@ -25,12 +25,12 @@ namespace Chronos.App.Controllers
         public async Task<ApiListResponse<DataContracts.Product>> GetProducts()
         {
             var products = await _productService.GetProducts(new ProductFilter { Enabled = true });
-            var apiResponse = products.Select(product => new DataContracts.Product
+            var apiData = products.Select(product => new DataContracts.Product
             {
                 Id = product.Id,
                 Name = product.Name
             }).ToArray();
-            return new ApiListResponse<DataContracts.Product>(apiResponse);
+            return new ApiListResponse<DataContracts.Product>(apiData);
         }
     }
 }
