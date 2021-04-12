@@ -19,25 +19,16 @@ export class ChronosHttpClientService {
       }));
   }
 
-  post<T>(url: string, data: any, options?: any): Observable<T> {
-    return this.httpClient.post<ApiResponse<T>>(url, data, this.appendOptionsByPartnerName(options))
-      .pipe(map(result => {
-        return result.data;
-      }));
+  post(url: string, data: any, options?: any): Observable<any> {
+    return this.httpClient.post(url, data, this.appendOptionsByPartnerName(options));
   }
 
-  put<T>(url: string, data: any, options?: any): Observable<T> {
-    return this.httpClient.put<ApiResponse<T>>(url, data, this.appendOptionsByPartnerName(options))
-    .pipe(map(result => {
-      return result.data;
-    }));
+  put(url: string, data: any, options?: any): Observable<any> {
+    return this.httpClient.put(url, data, this.appendOptionsByPartnerName(options));
   }
 
-  delete<T>(url: string, options?: any): Observable<T> {
-    return this.httpClient.delete<ApiResponse<T>>(url, this.appendOptionsByPartnerName(options))
-    .pipe(map(result => {
-      return result.data;
-    }));
+  delete(url: string, options?: any): Observable<any> {
+    return this.httpClient.delete(url, this.appendOptionsByPartnerName(options))
   }
 
   private appendOptionsByPartnerName(options: any): Object {

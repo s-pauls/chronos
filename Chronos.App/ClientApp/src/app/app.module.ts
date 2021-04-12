@@ -9,22 +9,21 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { AppComponent } from './app.component';
 import { AuthenticatedGuard } from './guard/authenticated.guard';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { NavSidebarComponent } from './nav-sidebar/nav-sidebar.component';
-import { SignInComponent } from './user/sign-in/sign-in.component';
-import { SignOutComponent } from './user/sign-out/sign-out.component';
-import { LoginLayoutComponent } from './login-layout/login-layout.component';
-import { MainLayoutComponent } from './main-layout/main-layout.component';
+import { NavMenuComponent } from './component/nav-menu/nav-menu.component';
+import { HomeComponent } from './component/home/home.component';
+import { NavSidebarComponent } from './component/nav-sidebar/nav-sidebar.component';
+import { SignInComponent } from './component/user/sign-in/sign-in.component';
+import { SignOutComponent } from './component/user/sign-out/sign-out.component';
+import { LoginLayoutComponent } from './component/login-layout/login-layout.component';
+import { MainLayoutComponent } from './component/main-layout/main-layout.component';
 import { AppConfigService } from './service';
 import { ToastrHttpInterceptorService } from './service/toastr-http-interceptor.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TagsComponent } from './tags/tags.component';
-import { FeatureRulesComponent } from './rules/feature-rules/feature-rules.component';
-import { StoryRulesComponent } from './rules/story-rules/story-rules.component';
-import { TaskRulesComponent } from './rules/task-rules/task-rules.component';
+import { TagsComponent } from './component/tags/tags.component';
+import { FeatureRulesListComponent } from './component/rules/feature-rules-list/feature-rules-list.component';
+import { FeatureRulesComponent } from './component/rules/feature-rules/feature-rules.component';
+import { StoryRulesComponent } from './component/rules/story-rules/story-rules.component';
+import { TaskRulesComponent } from './component/rules/task-rules/task-rules.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
@@ -32,8 +31,6 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     NavSidebarComponent,
     SignInComponent,
     SignOutComponent,
@@ -42,7 +39,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     FeatureRulesComponent,    
     TagsComponent,
     StoryRulesComponent,
-    TaskRulesComponent
+    TaskRulesComponent,
+    FeatureRulesListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -54,9 +52,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
       { path: '', component: MainLayoutComponent, canActivate: [AuthenticatedGuard], children: [
         { path: '', component: HomeComponent, pathMatch: 'full'},
         { path: 'User/SignOut', component: SignOutComponent, pathMatch: 'full'},
-        { path: 'counter', component: CounterComponent},
-        { path: 'fetch-data', component: FetchDataComponent},
-        { path: 'feature-rules', component: FeatureRulesComponent}
+        { path: 'feature-rules-list', component: FeatureRulesListComponent},
+        { path: 'feature-rules', component: FeatureRulesComponent},
+        { path: 'feature-rules/:id', component: FeatureRulesComponent}
       ]},
       { path: '', component: LoginLayoutComponent, children: [
         { path: 'User/SignIn', component: SignInComponent }

@@ -85,8 +85,7 @@ namespace Chronos.Core
                             Description = Labels.FeatureRulesConstants_TitleVariables_ZeroStoryOrderNumber_Description
                         },
                     },
-                    Tags = GetStoryTags(),
-                    DefaultTags = GetDefaultTags()
+                    Tags = GetStoryTags()
                 },
 
                 ZeroTaskRules = new TaskRules
@@ -156,8 +155,7 @@ namespace Chronos.Core
                     },
                     Tags = GetStoryTags(),
                     Description = Labels.FeatureRulesConstants_TitleVariables_StoryDescription,
-                    AcceptanceCriteria = Labels.FeatureRulesConstants_TitleVariables_StoryAcceptanceCriteria,
-                    DefaultTags = GetDefaultTags()
+                    AcceptanceCriteria = Labels.FeatureRulesConstants_TitleVariables_StoryAcceptanceCriteria
                 },
 
                 TaskRules = new TaskRules
@@ -197,7 +195,7 @@ namespace Chronos.Core
                         }
                     },
                     DefaultTags = GetDefaultTags()
-                },
+                }
             };
 
             string[] GetStoryTags()

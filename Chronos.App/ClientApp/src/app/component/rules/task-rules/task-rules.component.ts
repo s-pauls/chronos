@@ -9,6 +9,7 @@ import { TaskRules } from 'src/app/models';
 export class TaskRulesComponent implements OnInit {
   @Input() taskRules: TaskRules = new TaskRules();
   @Input() title = '';
+  @Input() dropup = false;
 
   constructor() { }
 

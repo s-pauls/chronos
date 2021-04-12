@@ -1,0 +1,31 @@
+<div id="featureRules" class="container p-3 h-100">
+    <div class="mb-3">
+        <div class="d-flex border-bottom pb-3">
+            <h4 class="title">Feature Rules</h4>
+            <button class="btn btn-primary ml-auto" [routerLink]="['/feature-rules']"  type="button">Add</button>
+        </div>
+    </div>    
+    <ngx-datatable
+        class="material striped"
+        style="height: 88%;"
+        [rows]="featureRulesList"
+        [columnMode]="columnMode.force"
+        [headerHeight]="50"
+        [rowHeight]="60"
+        [footerHeight]="50"
+        [scrollbarV]="true">
+        <ngx-datatable-column name="Template name" [resizeable]="false">
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                <div class="d-flex">
+                    <div class="w-100 m-auto">
+                        {{ row.name }}
+                    </div>
+                    <div class=" ml-auto">
+                        <button class="btn btn-primary table-button mr-2" [routerLink]="['/feature-rules', row.id]" type="button">Edit</button>
+                        <button class="btn btn-primary table-button" (click)="onDelete(row.id)" type="button">Delete</button>
+                    </div>
+                </div>
+            </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
+</div>

@@ -1,4 +1,4 @@
-<div id="storyRules" class="border rounded p-1 mb-3">
+<div class="border rounded p-1 mb-3">
     <label class="rule-name-title mb-0">{{ title }}</label>
     <div class="p-3">
         <div class="mb-1">
@@ -26,7 +26,7 @@
                 <label>Tags</label>
             </div>
             <div>
-                <app-tags [tags]="storyRules.tags" [defaultTags]="storyRules.defaultTags"></app-tags>
+                <app-tags [tags]="storyRules.tags" [defaultTags]="storyRules.defaultTags" [dropup]="dropup"></app-tags>
             </div>                    
         </div>
     </div>

@@ -18,9 +18,9 @@ export class ToastrHttpInterceptorService implements HttpInterceptor {
           if (response instanceof HttpResponse) {
             if (response.status === 200) {
               var apiResponse = response.body as ApiResponse<any>;
-              if(apiResponse.successMessage){
+              if(apiResponse.successMessage) {
                 this.toasterService.success('', apiResponse.successMessage);
-              }              
+              }
             }
 
             if (response.status === 204) {

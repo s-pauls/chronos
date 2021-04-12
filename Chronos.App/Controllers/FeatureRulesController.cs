@@ -53,26 +53,29 @@ namespace Chronos.App.Controllers
 
         // POST api/<FeatureRulesController>
         [HttpPost]
-        public async Task PostAsync([FromBody] ApiContract.FeatureRules featureRules)
+        public async Task<IActionResult> PostAsync([FromBody] ApiContract.FeatureRules featureRules)
         {
             var model = _mapper.Map<DomainModels.FeatureRules>(featureRules);
             await _featureRulesService.AddAsync(model);
+            return NoContent();
         }
 
         // PUT api/<FeatureRulesController>/5
         [HttpPut("{id}")]
-        public async Task PutAsync(int id, [FromBody] ApiContract.FeatureRules featureRules)
+        public async Task<IActionResult> PutAsync(int id, [FromBody] ApiContract.FeatureRules featureRules)
         {
             var model = _mapper.Map<DomainModels.FeatureRules>(featureRules);
             model.Id = id;
             await _featureRulesService.ModifyAsync(model);
+            return NoContent();
         }
 
         // DELETE api/<FeatureRulesController>/5
         [HttpDelete("{id}")]
-        public async Task DeleteAsync(int id)
+        public async Task<IActionResult> DeleteAsync(int id)
         {
             await _featureRulesService.RemoveAsync(id);
+            return NoContent();
         }
     }
 }

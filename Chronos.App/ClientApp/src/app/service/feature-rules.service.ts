@@ -19,11 +19,23 @@ export class FeatureRulesService {
     return this.httpClient.get(this.apiUrl);
   }
 
-  getById(id: number): Observable<FeatureRules>{
+  getById(id: string): Observable<FeatureRules>{
     return this.httpClient.get(`${this.apiUrl}/${id}`);
   }
 
   getDefault(): Observable<FeatureRules>{
     return this.httpClient.get(`${this.apiUrl}/default`);
+  }
+
+  add(featureRules: FeatureRules): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}`, featureRules);
+  }
+
+  update(id: string,featureRules: FeatureRules): Observable<any> {
+    return this.httpClient.put(`${this.apiUrl}/${id}`, featureRules);
+  }
+
+  delete(id: string): Observable<any> {
+    return this.httpClient.delete(`${this.apiUrl}/${id}`);
   }
 }

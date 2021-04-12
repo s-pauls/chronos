@@ -56,3 +56,10 @@ svg {
 .ql-container {
   font-size: 1em;
 }
+
+.spinner-border {
+  height: 10em;
+  width: 10em;
+  border: 0.5em solid currentColor;
+  border-right-color: transparent;
+}

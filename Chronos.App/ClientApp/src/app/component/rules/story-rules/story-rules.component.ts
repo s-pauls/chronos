@@ -9,6 +9,7 @@ import { StoryRules } from 'src/app/models';
 export class StoryRulesComponent implements OnInit {
   @Input() storyRules: StoryRules = new StoryRules();
   @Input() title = '';
+  @Input() dropup = false;
 
   constructor() { }
 

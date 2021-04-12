@@ -8,7 +8,8 @@ import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } fr
 export class TagsComponent implements OnInit {
   @Input() tags: string[] = [];
   @Input() defaultTags: string[] = [];
-  
+  @Input() dropup = false;
+
   @ViewChild('input', {static: false}) inputElement: ElementRef;
 
   addedDefaultTags: string[] = [];
