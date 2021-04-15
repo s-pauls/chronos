@@ -6,6 +6,6 @@ namespace Chronos.Domain.Interfaces
 {
     public interface IProductService
     {
-        public Task<List<Product>> GetProducts(ProductFilter filter);
+        Task<List<Product>> GetProducts(ProductFilter filter);
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Chronos.Data;
 using Chronos.Domain.Entities;
+using Chronos.Domain.Entities.AuditLogs;
 using Chronos.Domain.Entities.RequestsOfWork;
 using Chronos.Domain.Enums;
 using Chronos.Domain.Interfaces;
@@ -54,9 +55,9 @@ namespace Chronos.Core.RequestsOfWork
         public async Task<int> AddAsync(FeatureDefinitionDocument requestOfWork)
         {
             var requestId = await _requestOfWorkRepository.AddAsync(requestOfWork);
-            await _auditLogRepository.AddLog(new AuditLog
+            await _auditLogRepository.AddAsync(new AuditLog
             {
-                ChronosObject = ChronosObject.FeatureDefinitionDocument,
+                ChronosObject = ChronosObject.RequestOfWork,
                 ChronosObjectId = requestId,
                 Date = DateTime.UtcNow,
                 Message = "The FDD created",
@@ -68,9 +69,9 @@ namespace Chronos.Core.RequestsOfWork
         public async Task<int> AddAsync(StatementOfWork requestOfWork)
         {
             var requestId = await _requestOfWorkRepository.AddAsync(requestOfWork);
-            await _auditLogRepository.AddLog(new AuditLog
+            await _auditLogRepository.AddAsync(new AuditLog
             {
-                ChronosObject = ChronosObject.StatementOfWork,
+                ChronosObject = ChronosObject.RequestOfWork,
                 ChronosObjectId = requestId,
                 Date = DateTime.UtcNow,
                 Message = "The SOW created",
@@ -82,9 +83,9 @@ namespace Chronos.Core.RequestsOfWork
         public async Task<int> AddAsync(FixRequest requestOfWork)
         {
             var requestId = await _requestOfWorkRepository.AddAsync(requestOfWork);
-            await _auditLogRepository.AddLog(new AuditLog
+            await _auditLogRepository.AddAsync(new AuditLog
             {
-                ChronosObject = ChronosObject.FixRequest,
+                ChronosObject = ChronosObject.RequestOfWork,
                 ChronosObjectId = requestId,
                 Date = DateTime.UtcNow,
                 Message = "The FR created",

@@ -23,6 +23,7 @@ namespace Chronos.App.Configurations
                 .AddScoped<IRequestOfWorkRepository, RequestOfWorkRepository>()
                 .AddScoped<IRequestOfWorkService, RequestOfWorkService>()
                 .AddScoped<IAuditLogRepository, AuditLogRepository>()
+                .AddScoped<IAuditLogService, AuditLogService>()
                 .AddScoped<IWorkItemService, WorkItemService>()
                 .AddScoped<IAzureWorkItemClient, AzureWorkItemClient>();
 

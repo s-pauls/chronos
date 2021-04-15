@@ -6,11 +6,11 @@ namespace Chronos.Domain.Interfaces
 {
     public interface IFeatureRulesService
     {
-        public Task<List<FeatureRules>> GetListAsync();
-        public Task<FeatureRules> GetByIdAsync(int id);
+        Task<List<FeatureRules>> GetListAsync();
+        Task<FeatureRules> GetByIdAsync(int id);
         FeatureRules GetDefaultItem();
-        public Task<int> AddAsync(FeatureRules featureRules);
-        public Task ModifyAsync(FeatureRules featureRules);
-        public Task RemoveAsync(int id);
+        Task<int> AddAsync(FeatureRules featureRules);
+        Task ModifyAsync(FeatureRules featureRules);
+        Task RemoveAsync(int id);
     }
 }

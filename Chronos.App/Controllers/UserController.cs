@@ -1,5 +1,4 @@
 ﻿using Chronos.App.Models;
-using Chronos.Domain.Entities;
 using Chronos.Domain.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
