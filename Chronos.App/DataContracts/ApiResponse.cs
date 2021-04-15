@@ -14,6 +14,12 @@ namespace Chronos.App.DataContracts
             Data = data;
         }
 
+        public ApiResponse(T data, string successMessage)
+        {
+            Data = data;
+            SuccessMessage = successMessage;
+        }
+
         public T Data { get; set; }
         
         public string SuccessMessage { get; set; }

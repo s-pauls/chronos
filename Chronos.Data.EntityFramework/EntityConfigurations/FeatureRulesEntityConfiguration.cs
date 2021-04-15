@@ -10,6 +10,7 @@ namespace Chronos.Data.EntityFramework.EntityConfigurations
         {
             builder
                 .Property(t => t.Name)
+                .HasMaxLength(100)
                 .IsRequired();
         }
     }

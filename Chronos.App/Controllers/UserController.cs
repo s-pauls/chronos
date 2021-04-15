@@ -16,7 +16,7 @@ using Chronos.Domain.Entities.User;
 
 namespace Chronos.App.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/user")]
     [ApiController]
     [Authorize]
     public class UserController : ControllerBase

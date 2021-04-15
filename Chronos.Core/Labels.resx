@@ -178,4 +178,46 @@
   <data name="FeatureRulesConstants.TitleVariables.ZeroStoryOrderNumber.Description" xml:space="preserve">
     <value>00</value>
   </data>
+  <data name="NumberPrefix.FeatureDefinitionDocument" xml:space="preserve">
+    <value>CSD</value>
+  </data>
+  <data name="NumberPrefix.FixRequest" xml:space="preserve">
+    <value>FR</value>
+  </data>
+  <data name="NumberPrefix.StatementOfWork" xml:space="preserve">
+    <value>CSP</value>
+  </data>
+  <data name="RequestOfWorkStatus.Approved" xml:space="preserve">
+    <value>Approved</value>
+  </data>
+  <data name="RequestOfWorkStatus.Blocked" xml:space="preserve">
+    <value>Blocked</value>
+  </data>
+  <data name="RequestOfWorkStatus.InProgress" xml:space="preserve">
+    <value>In Progress</value>
+  </data>
+  <data name="RequestOfWorkStatus.NotSentToCSI" xml:space="preserve">
+    <value>Not Sent to CSI</value>
+  </data>
+  <data name="RequestOfWorkStatus.NotStarted" xml:space="preserve">
+    <value>Not Started</value>
+  </data>
+  <data name="RequestOfWorkStatus.OnHold" xml:space="preserve">
+    <value>On Hold</value>
+  </data>
+  <data name="RequestOfWorkStatus.Released" xml:space="preserve">
+    <value>Released</value>
+  </data>
+  <data name="RequestOfWorkStatus.ReleasedNotReproducible" xml:space="preserve">
+    <value>Released - Not Reproducible</value>
+  </data>
+  <data name="RequestOfWorkStatus.ReleasedReproducible" xml:space="preserve">
+    <value>Released - Reproducible</value>
+  </data>
+  <data name="RequestOfWorkStatus.Removed" xml:space="preserve">
+    <value>Removed</value>
+  </data>
+  <data name="RequestOfWorkStatus.SentToWEX" xml:space="preserve">
+    <value>Sent to WEX</value>
+  </data>
 </root>

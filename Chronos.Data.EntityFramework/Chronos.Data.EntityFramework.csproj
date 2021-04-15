@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Chronos.Data\Chronos.Data.csproj" />
+    <ProjectReference Include="..\Chronos.Utilities\Chronos.Utilities.csproj" />
   </ItemGroup>
 
   <ItemGroup>

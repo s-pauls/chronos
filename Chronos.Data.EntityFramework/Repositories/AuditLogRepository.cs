@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Chronos.Data.EntityFramework.Entities;
 using Chronos.Domain.Entities;
-using Chronos.Domain.Entities.User;
 
 namespace Chronos.Data.EntityFramework.Repositories
 {
@@ -15,7 +14,7 @@ namespace Chronos.Data.EntityFramework.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task AddLog(UserContext context, AuditLog auditLog)
+        public async Task AddLog(AuditLog auditLog)
         {
             var auditLogEntity = new AuditLogEntity
             {
@@ -23,7 +22,8 @@ namespace Chronos.Data.EntityFramework.Repositories
                 ObjectId = auditLog.ChronosObjectId,
                 ObjectType = auditLog.ChronosObject,
                 Date = auditLog.Date,
-                UserId = context.UserId
+                UserId = auditLog.UserId,
+                IsCustom = auditLog.IsCustom
             };
             await _dbContext.AuditLogs.AddAsync(auditLogEntity);
             await _dbContext.SaveChangesAsync();

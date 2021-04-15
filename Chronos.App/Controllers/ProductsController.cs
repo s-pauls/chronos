@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Chronos.App.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/products")]
     [Authorize]
     public class ProductsController : ControllerBase
     {

@@ -12,6 +12,13 @@ namespace Chronos.Data.EntityFramework
 
         public DbSet<ProductEntity> Products { get; set; }
         public DbSet<FeatureRulesEntity> FeatureRules { get; set; }
+        public DbSet<FeatureBlankEntity> FeatureBlank { get; set; }
+        public DbSet<RequestOfWorkEntity> RequestsOfWork { get; set; }
+        public DbSet<EstimateTemplateEntity> EstimateTemplates{ get; set; }
+        public DbSet<EstimateEntity> Estimates{ get; set; }
+        public DbSet<EstimateItemEntity> EstimateItems{ get; set; }
+        public DbSet<EstimateItemTaskEntity> EstimateItemTasks{ get; set; }
+        public DbSet<EstimateMemberEntity> EstimateMembers{ get; set; }
         public DbSet<AuditLogEntity> AuditLogs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -19,6 +26,17 @@ namespace Chronos.Data.EntityFramework
             modelBuilder.ApplyConfiguration(new AuditLogEntityConfiguration());
             modelBuilder.ApplyConfiguration(new ProductEntityConfiguration());
             modelBuilder.ApplyConfiguration(new FeatureRulesEntityConfiguration());
+
+            modelBuilder.ApplyConfiguration(new RequestOfWorkEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new StatementOfWorkEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new FixRequestEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new FeatureDefinitionDocumentEntityConfiguration());
+
+            modelBuilder.ApplyConfiguration(new EstimateTemplateEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new EstimateEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new EstimateEntityItemEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new EstimateEntityItemTaskEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new EstimateMemberEntityConfiguration());
         }
     }
 }

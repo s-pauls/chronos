@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Chronos.Core.Microsoft.AzureDevOps;
+using Chronos.Core.RequestsOfWork;
 
 namespace Chronos.App.Configurations
 {
@@ -19,6 +20,8 @@ namespace Chronos.App.Configurations
                 .AddScoped<IProductService, ProductService>()
                 .AddScoped<IFeatureRulesRepository, FeatureRulesRepository>()
                 .AddScoped<IFeatureRulesService, FeatureRulesService>()
+                .AddScoped<IRequestOfWorkRepository, RequestOfWorkRepository>()
+                .AddScoped<IRequestOfWorkService, RequestOfWorkService>()
                 .AddScoped<IAuditLogRepository, AuditLogRepository>()
                 .AddScoped<IWorkItemService, WorkItemService>()
                 .AddScoped<IAzureWorkItemClient, AzureWorkItemClient>();

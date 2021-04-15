@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Chronos.Data\Chronos.Data.csproj" />
     <ProjectReference Include="..\Chronos.Domain\Chronos.Domain.csproj" />
   </ItemGroup>

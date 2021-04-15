@@ -29,6 +29,9 @@ namespace Chronos.Data.EntityFramework.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsCustom")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Message")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -53,6 +56,159 @@ namespace Chronos.Data.EntityFramework.Migrations
                     b.ToTable("AuditLogs");
                 });
 
+            modelBuilder.Entity("Chronos.Data.EntityFramework.Entities.EstimateEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("EstimateTemplateId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("GrandTotal")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Version")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EstimateTemplateId");
+
+                    b.ToTable("Estimates");
+                });
+
+            modelBuilder.Entity("Chronos.Data.EntityFramework.Entities.EstimateItemEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("EstimateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EstimateId");
+
+                    b.ToTable("EstimateItems");
+                });
+
+            modelBuilder.Entity("Chronos.Data.EntityFramework.Entities.EstimateItemTaskEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Discipline")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EstimateItemId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<double>("Value")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EstimateItemId");
+
+                    b.HasIndex("Name", "Discipline", "EstimateItemId")
+                        .IsUnique();
+
+                    b.ToTable("EstimateItemTasks");
+                });
+
+            modelBuilder.Entity("Chronos.Data.EntityFramework.Entities.EstimateMemberEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("EstimateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MemberId")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<double>("SpentHours")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MemberId", "EstimateId")
+                        .IsUnique();
+
+                    b.ToTable("EstimateMembers");
+                });
+
+            modelBuilder.Entity("Chronos.Data.EntityFramework.Entities.EstimateTemplateEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Version")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EstimateTemplates");
+                });
+
+            modelBuilder.Entity("Chronos.Data.EntityFramework.Entities.FeatureBlankEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("EstimateId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RequestOfWorkId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EstimateId");
+
+                    b.HasIndex("RequestOfWorkId")
+                        .IsUnique();
+
+                    b.ToTable("FeatureBlank");
+                });
+
             modelBuilder.Entity("Chronos.Data.EntityFramework.Entities.FeatureRulesEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -62,7 +218,8 @@ namespace Chronos.Data.EntityFramework.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Rules")
                         .HasColumnType("nvarchar(max)");
@@ -92,6 +249,184 @@ namespace Chronos.Data.EntityFramework.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Chronos.Data.EntityFramework.Entities.RequestOfWorkEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AdoId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CSIEstimateETA")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DesiredReleaseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("DocumentUrl")
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NumberPrefix")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("NumberSuffix")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<int?>("Priority")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProductId")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("SkypeGroupUrl")
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("WEXEstimateETA")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Number", "NumberSuffix")
+                        .IsUnique()
+                        .HasFilter("[NumberSuffix] IS NOT NULL");
+
+                    b.ToTable("RequestOfWork");
+                });
+
+            modelBuilder.Entity("Chronos.Data.EntityFramework.Entities.FeatureDefinitionDocumentEntity", b =>
+                {
+                    b.HasBaseType("Chronos.Data.EntityFramework.Entities.RequestOfWorkEntity");
+
+                    b.ToTable("RequestOfWork_FDD");
+                });
+
+            modelBuilder.Entity("Chronos.Data.EntityFramework.Entities.FixRequestEntity", b =>
+                {
+                    b.HasBaseType("Chronos.Data.EntityFramework.Entities.RequestOfWorkEntity");
+
+                    b.Property<bool>("IsPartner")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("WexTeam")
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.ToTable("RequestOfWork_FR");
+                });
+
+            modelBuilder.Entity("Chronos.Data.EntityFramework.Entities.StatementOfWorkEntity", b =>
+                {
+                    b.HasBaseType("Chronos.Data.EntityFramework.Entities.RequestOfWorkEntity");
+
+                    b.Property<string>("PartnerNumber")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.ToTable("RequestOfWork_SOW");
+                });
+
+            modelBuilder.Entity("Chronos.Data.EntityFramework.Entities.EstimateEntity", b =>
+                {
+                    b.HasOne("Chronos.Data.EntityFramework.Entities.EstimateTemplateEntity", "EstimateTemplate")
+                        .WithMany()
+                        .HasForeignKey("EstimateTemplateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EstimateTemplate");
+                });
+
+            modelBuilder.Entity("Chronos.Data.EntityFramework.Entities.EstimateItemEntity", b =>
+                {
+                    b.HasOne("Chronos.Data.EntityFramework.Entities.EstimateEntity", "Estimate")
+                        .WithMany()
+                        .HasForeignKey("EstimateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Estimate");
+                });
+
+            modelBuilder.Entity("Chronos.Data.EntityFramework.Entities.EstimateItemTaskEntity", b =>
+                {
+                    b.HasOne("Chronos.Data.EntityFramework.Entities.EstimateItemEntity", "EstimateItem")
+                        .WithMany()
+                        .HasForeignKey("EstimateItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EstimateItem");
+                });
+
+            modelBuilder.Entity("Chronos.Data.EntityFramework.Entities.FeatureBlankEntity", b =>
+                {
+                    b.HasOne("Chronos.Data.EntityFramework.Entities.EstimateEntity", "Estimate")
+                        .WithMany()
+                        .HasForeignKey("EstimateId");
+
+                    b.HasOne("Chronos.Data.EntityFramework.Entities.RequestOfWorkEntity", "RequestOfWork")
+                        .WithOne("FeatureBlank")
+                        .HasForeignKey("Chronos.Data.EntityFramework.Entities.FeatureBlankEntity", "RequestOfWorkId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Estimate");
+
+                    b.Navigation("RequestOfWork");
+                });
+
+            modelBuilder.Entity("Chronos.Data.EntityFramework.Entities.FeatureDefinitionDocumentEntity", b =>
+                {
+                    b.HasOne("Chronos.Data.EntityFramework.Entities.RequestOfWorkEntity", null)
+                        .WithOne()
+                        .HasForeignKey("Chronos.Data.EntityFramework.Entities.FeatureDefinitionDocumentEntity", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Chronos.Data.EntityFramework.Entities.FixRequestEntity", b =>
+                {
+                    b.HasOne("Chronos.Data.EntityFramework.Entities.RequestOfWorkEntity", null)
+                        .WithOne()
+                        .HasForeignKey("Chronos.Data.EntityFramework.Entities.FixRequestEntity", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Chronos.Data.EntityFramework.Entities.StatementOfWorkEntity", b =>
+                {
+                    b.HasOne("Chronos.Data.EntityFramework.Entities.RequestOfWorkEntity", null)
+                        .WithOne()
+                        .HasForeignKey("Chronos.Data.EntityFramework.Entities.StatementOfWorkEntity", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Chronos.Data.EntityFramework.Entities.RequestOfWorkEntity", b =>
+                {
+                    b.Navigation("FeatureBlank");
                 });
 #pragma warning restore 612, 618
         }

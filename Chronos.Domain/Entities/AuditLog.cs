@@ -10,5 +10,6 @@ namespace Chronos.Domain.Entities
         public int ChronosObjectId { get; set; }
         public ChronosObject ChronosObject { get; set; }
         public string Message { get; set; }
+        public bool IsCustom { get; set; }
     }
 }

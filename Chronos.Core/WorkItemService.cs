@@ -23,7 +23,7 @@ namespace Chronos.Core
             // get from Database
             var internalFeature = new Feature();
 
-            var azureFeature = await _client.GetAzureWorkItemAsync(internalFeature.ExternalId, settings);
+            var azureFeature = await _client.GetAzureWorkItemAsync(internalFeature.AdoId, settings);
 
             var tasks = new List<Task>();
 

@@ -186,5 +186,131 @@ namespace Chronos.Core {
                 return ResourceManager.GetString("FeatureRulesConstants.TitleVariables.ZeroStoryOrderNumber.Description", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CSD.
+        /// </summary>
+        internal static string NumberPrefix_FeatureDefinitionDocument {
+            get {
+                return ResourceManager.GetString("NumberPrefix.FeatureDefinitionDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FR.
+        /// </summary>
+        internal static string NumberPrefix_FixRequest {
+            get {
+                return ResourceManager.GetString("NumberPrefix.FixRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CSP.
+        /// </summary>
+        internal static string NumberPrefix_StatementOfWork {
+            get {
+                return ResourceManager.GetString("NumberPrefix.StatementOfWork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Approved.
+        /// </summary>
+        internal static string RequestOfWorkStatus_Approved {
+            get {
+                return ResourceManager.GetString("RequestOfWorkStatus.Approved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blocked.
+        /// </summary>
+        internal static string RequestOfWorkStatus_Blocked {
+            get {
+                return ResourceManager.GetString("RequestOfWorkStatus.Blocked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In Progress.
+        /// </summary>
+        internal static string RequestOfWorkStatus_InProgress {
+            get {
+                return ResourceManager.GetString("RequestOfWorkStatus.InProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not Sent to CSI.
+        /// </summary>
+        internal static string RequestOfWorkStatus_NotSentToCSI {
+            get {
+                return ResourceManager.GetString("RequestOfWorkStatus.NotSentToCSI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not Started.
+        /// </summary>
+        internal static string RequestOfWorkStatus_NotStarted {
+            get {
+                return ResourceManager.GetString("RequestOfWorkStatus.NotStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On Hold.
+        /// </summary>
+        internal static string RequestOfWorkStatus_OnHold {
+            get {
+                return ResourceManager.GetString("RequestOfWorkStatus.OnHold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Released.
+        /// </summary>
+        internal static string RequestOfWorkStatus_Released {
+            get {
+                return ResourceManager.GetString("RequestOfWorkStatus.Released", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Released - Not Reproducible.
+        /// </summary>
+        internal static string RequestOfWorkStatus_ReleasedNotReproducible {
+            get {
+                return ResourceManager.GetString("RequestOfWorkStatus.ReleasedNotReproducible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Released - Reproducible.
+        /// </summary>
+        internal static string RequestOfWorkStatus_ReleasedReproducible {
+            get {
+                return ResourceManager.GetString("RequestOfWorkStatus.ReleasedReproducible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removed.
+        /// </summary>
+        internal static string RequestOfWorkStatus_Removed {
+            get {
+                return ResourceManager.GetString("RequestOfWorkStatus.Removed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sent to WEX.
+        /// </summary>
+        internal static string RequestOfWorkStatus_SentToWEX {
+            get {
+                return ResourceManager.GetString("RequestOfWorkStatus.SentToWEX", resourceCulture);
+            }
+        }
     }
 }

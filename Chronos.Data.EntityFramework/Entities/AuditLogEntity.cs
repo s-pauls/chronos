@@ -11,5 +11,6 @@ namespace Chronos.Data.EntityFramework.Entities
         public string Message { get; set; }
         public int ObjectId { get; set; }
         public ChronosObject ObjectType { get; set; }
+        public bool IsCustom { get; set; }
     }
 }

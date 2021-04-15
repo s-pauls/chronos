@@ -25,7 +25,6 @@ namespace Chronos.App.Controllers
             _featureRulesService = featureRulesService;
         }
 
-        // GET: api/<FeatureRulesController>
         [HttpGet]
         public async Task<ApiListResponse<ApiContract.FeatureRulesWithId>> GetListAsync()
         {
@@ -34,7 +33,6 @@ namespace Chronos.App.Controllers
             return new ApiListResponse<ApiContract.FeatureRulesWithId>(apiData);
         }
 
-        // GET api/<FeatureRulesController>/5
         [HttpGet("{id}")]
         public async Task<ApiResponse<ApiContract.FeatureRulesWithId>> GetItemByIdAsync(int id)
         {
@@ -51,7 +49,6 @@ namespace Chronos.App.Controllers
             return new ApiResponse<ApiContract.FeatureRules>(apiData);
         }
 
-        // POST api/<FeatureRulesController>
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] ApiContract.FeatureRules featureRules)
         {
@@ -60,7 +57,6 @@ namespace Chronos.App.Controllers
             return NoContent();
         }
 
-        // PUT api/<FeatureRulesController>/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAsync(int id, [FromBody] ApiContract.FeatureRules featureRules)
         {
@@ -70,7 +66,6 @@ namespace Chronos.App.Controllers
             return NoContent();
         }
 
-        // DELETE api/<FeatureRulesController>/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
