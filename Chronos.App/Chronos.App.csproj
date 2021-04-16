@@ -34,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Chronos.Core.Excel\Chronos.Core.Excel.csproj" />
     <ProjectReference Include="..\Chronos.Core.Microsoft.AzureDevOps\Chronos.Core.Microsoft.AzureDevOps.csproj" />
     <ProjectReference Include="..\Chronos.Core\Chronos.Core.csproj" />
     <ProjectReference Include="..\Chronos.Data.EntityFramework\Chronos.Data.EntityFramework.csproj" />

@@ -1,4 +1,5 @@
 ﻿using Chronos.Core;
+using Chronos.Core.Estimates;
 using Chronos.Data;
 using Chronos.Data.EntityFramework;
 using Chronos.Data.EntityFramework.Repositories;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Chronos.Core.Microsoft.AzureDevOps;
 using Chronos.Core.RequestsOfWork;
+using Chronos.Core.Excel.Parsers;
 
 namespace Chronos.App.Configurations
 {
@@ -25,7 +27,10 @@ namespace Chronos.App.Configurations
                 .AddScoped<IAuditLogRepository, AuditLogRepository>()
                 .AddScoped<IAuditLogService, AuditLogService>()
                 .AddScoped<IWorkItemService, WorkItemService>()
-                .AddScoped<IAzureWorkItemClient, AzureWorkItemClient>();
+                .AddScoped<IAzureWorkItemClient, AzureWorkItemClient>()
+                .AddScoped<IEstimateRepository, EstimateRepository>()
+                .AddScoped<IEstimateService, EstimateService>()
+                .AddScoped<IEstimateParser, PointSolutionsEstimateParser>();
 
             services.AddHttpClient<IUserService, UserService>();
 

@@ -4,14 +4,16 @@ using Chronos.Data.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Chronos.Data.EntityFramework.Migrations
 {
     [DbContext(typeof(ChronosDbContext))]
-    partial class ChronosDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210415212947_UpgradeEstimateTables")]
+    partial class UpgradeEstimateTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,12 +95,6 @@ namespace Chronos.Data.EntityFramework.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Assumptions")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Discipline")
-                        .HasColumnType("int");
-
                     b.Property<int>("EstimateId")
                         .HasColumnType("int");
 
@@ -124,6 +120,9 @@ namespace Chronos.Data.EntityFramework.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Discipline")
+                        .HasColumnType("int");
+
                     b.Property<int>("EstimateItemId")
                         .HasColumnType("int");
 
@@ -132,12 +131,14 @@ namespace Chronos.Data.EntityFramework.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(450)
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EstimateItemId");
+
+                    b.HasIndex("Name", "Discipline", "EstimateItemId")
+                        .IsUnique();
 
                     b.ToTable("EstimateItemTasks");
                 });

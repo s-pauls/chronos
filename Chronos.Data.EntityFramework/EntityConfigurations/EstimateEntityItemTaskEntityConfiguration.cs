@@ -10,11 +10,8 @@ namespace Chronos.Data.EntityFramework.EntityConfigurations
         {
             builder
                 .Property(t => t.Name)
+                .HasMaxLength(450)
                 .IsRequired();
-
-            builder
-                .HasIndex(t => new { t.Name, t.Discipline, t.EstimateItemId })
-                .IsUnique();
         }
     }
 }

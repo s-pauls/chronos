@@ -10,7 +10,7 @@ using ApiContract = Chronos.App.DataContracts.Comments;
 
 namespace Chronos.App.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/requests-of-work")]
     [ApiController]
     public class RequestsOfWorkCommentsController : ControllerBase

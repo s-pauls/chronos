@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chronos.App.UnitTests", "Ch
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chronos.Core.Microsoft.AzureDevOps", "Chronos.Core.Microsoft.AzureDevOps\Chronos.Core.Microsoft.AzureDevOps.csproj", "{63609792-9A0E-4C90-8EB8-2E8C45CC9008}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chronos.Utilities.UnitTests", "Chronos.Utilities.UnitTests\Chronos.Utilities.UnitTests.csproj", "{023A4805-B7E7-40D7-A445-5D1425265533}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chronos.Utilities.UnitTests", "Chronos.Utilities.UnitTests\Chronos.Utilities.UnitTests.csproj", "{023A4805-B7E7-40D7-A445-5D1425265533}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chronos.Core.Excel", "Chronos.Core.Excel\Chronos.Core.Excel.csproj", "{82DA16EA-EF0E-4696-BDE1-93C4669B7E3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{023A4805-B7E7-40D7-A445-5D1425265533}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{023A4805-B7E7-40D7-A445-5D1425265533}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{023A4805-B7E7-40D7-A445-5D1425265533}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82DA16EA-EF0E-4696-BDE1-93C4669B7E3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82DA16EA-EF0E-4696-BDE1-93C4669B7E3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82DA16EA-EF0E-4696-BDE1-93C4669B7E3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82DA16EA-EF0E-4696-BDE1-93C4669B7E3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
