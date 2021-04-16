@@ -312,5 +312,32 @@ namespace Chronos.Core {
                 return ResourceManager.GetString("RequestOfWorkStatus.SentToWEX", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Feature Definition Document.
+        /// </summary>
+        internal static string RequestOfWorkType_FeatureDefinitionDocument {
+            get {
+                return ResourceManager.GetString("RequestOfWorkType.FeatureDefinitionDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fix Request.
+        /// </summary>
+        internal static string RequestOfWorkType_FixRequest {
+            get {
+                return ResourceManager.GetString("RequestOfWorkType.FixRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statement Of Work.
+        /// </summary>
+        internal static string RequestOfWorkType_StatementOfWork {
+            get {
+                return ResourceManager.GetString("RequestOfWorkType.StatementOfWork", resourceCulture);
+            }
+        }
     }
 }

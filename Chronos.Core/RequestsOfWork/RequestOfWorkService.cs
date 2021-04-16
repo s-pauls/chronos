@@ -19,7 +19,7 @@ namespace Chronos.Core.RequestsOfWork
         public RequestOfWorkService(
             IRequestOfWorkRepository requestOfWorkRepository,
             IAuditLogRepository auditLogRepository
-            )
+        )
         {
             _requestOfWorkRepository = requestOfWorkRepository;
             _auditLogRepository = auditLogRepository;
@@ -33,14 +33,28 @@ namespace Chronos.Core.RequestsOfWork
             return list;
         }
 
-        public async Task<List<FeatureStatusItem>> GetStatusListAsync()
+        public async Task<List<RequestOfWorkStatusItem>> GetStatusListAsync()
         {
             var list = Enum.GetValues(typeof(RequestOfWorkStatus))
                 .Cast<RequestOfWorkStatus>()
-                .Select(x => new FeatureStatusItem
+                .Select(x => new RequestOfWorkStatusItem
                 {
                     Id = (int)x,
                     Name = GetStatusName(x)
+                })
+                .ToList();
+
+            return await Task.FromResult(list);
+        }
+
+        public async Task<List<RequestOfWorkTypeItem>> GetTypeListAsync()
+        {
+            var list = Enum.GetValues(typeof(RequestOfWorkType))
+                .Cast<RequestOfWorkType>()
+                .Select(x => new RequestOfWorkTypeItem
+                {
+                    Id = (int)x,
+                    Name = GetTypeName(x)
                 })
                 .ToList();
 
@@ -140,5 +154,21 @@ namespace Chronos.Core.RequestsOfWork
                     throw new ArgumentOutOfRangeException(nameof(status), status, null);
             }
         }
+
+        private string GetTypeName(RequestOfWorkType requestOfWorkType)
+        {
+            switch (requestOfWorkType)
+            {
+                case RequestOfWorkType.FeatureDefinitionDocument:
+                    return Labels.RequestOfWorkType_FeatureDefinitionDocument;
+                case RequestOfWorkType.StatementOfWork:
+                    return Labels.RequestOfWorkType_StatementOfWork;
+                case RequestOfWorkType.FixRequest:
+                    return Labels.RequestOfWorkType_FixRequest;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(requestOfWorkType), requestOfWorkType, null);
+            }
+        }
     }
+
 }

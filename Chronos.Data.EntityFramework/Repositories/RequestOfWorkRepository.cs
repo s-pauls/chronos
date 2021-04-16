@@ -35,6 +35,20 @@ namespace Chronos.Data.EntityFramework.Repositories
                 {
                     query = query.Where(x => filter.Statuses.Contains(x.Status));
                 }
+
+                if (filter.RequestOfWorkTypes.NotNullAndAny())
+                {
+                    query = query.Where(x => 
+                        (filter.RequestOfWorkTypes.Contains(RequestOfWorkType.FeatureDefinitionDocument) && x is FeatureDefinitionDocumentEntity )
+                        || (filter.RequestOfWorkTypes.Contains(RequestOfWorkType.StatementOfWork) && x is StatementOfWorkEntity)
+                        || (filter.RequestOfWorkTypes.Contains(RequestOfWorkType.FixRequest) && x is FixRequestEntity)
+                        );
+                }
+
+                if (filter.Products.NotNullAndAny())
+                {
+                    query = query.Where(x => filter.Products.Contains(x.ProductId));
+                }
             }
 
             return await query.Select(x => new RequestOfWork

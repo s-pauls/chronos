@@ -220,4 +220,13 @@
   <data name="RequestOfWorkStatus.SentToWEX" xml:space="preserve">
     <value>Sent to WEX</value>
   </data>
+  <data name="RequestOfWorkType.FeatureDefinitionDocument" xml:space="preserve">
+    <value>Feature Definition Document</value>
+  </data>
+  <data name="RequestOfWorkType.FixRequest" xml:space="preserve">
+    <value>Fix Request</value>
+  </data>
+  <data name="RequestOfWorkType.StatementOfWork" xml:space="preserve">
+    <value>Statement Of Work</value>
+  </data>
 </root>

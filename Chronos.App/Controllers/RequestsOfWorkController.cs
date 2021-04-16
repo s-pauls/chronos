@@ -48,11 +48,19 @@ namespace Chronos.App.Controllers
         //}
 
         [HttpGet("statuses")]
-        public async Task<ApiListResponse<ApiContract.RequestOfWorkStatusItem>> GetDefaultItem()
+        public async Task<ApiListResponse<ApiContract.RequestOfWorkStatusItem>> GetRequestOfWorkStatuses()
         {
             var item = await _requestOfWorkService.GetStatusListAsync();
             var apiData = _mapper.Map<ApiContract.RequestOfWorkStatusItem[]>(item);
             return new ApiListResponse<ApiContract.RequestOfWorkStatusItem>(apiData);
+        }
+
+        [HttpGet("types")]
+        public async Task<ApiListResponse<ApiContract.RequestOfWorkTypeItem>> GetRequestOfWorkTypes()
+        {
+            var item = await _requestOfWorkService.GetTypeListAsync();
+            var apiData = _mapper.Map<ApiContract.RequestOfWorkTypeItem[]>(item);
+            return new ApiListResponse<ApiContract.RequestOfWorkTypeItem>(apiData);
         }
 
         [HttpPost("statement-of-work")]

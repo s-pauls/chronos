@@ -7,7 +7,8 @@ namespace Chronos.Domain.Interfaces
     public interface IRequestOfWorkService
     {
         Task<List<RequestOfWork>> GetListAsync(RequestOfWorkFilter filter);
-        Task<List<FeatureStatusItem>> GetStatusListAsync();
+        Task<List<RequestOfWorkStatusItem>> GetStatusListAsync();
+        Task<List<RequestOfWorkTypeItem>> GetTypeListAsync();
         Task<RequestOfWork> GetByIdAsync(int id);
         Task<int> AddAsync(FeatureDefinitionDocument requestOfWork);
         Task<int> AddAsync(StatementOfWork requestOfWork);
