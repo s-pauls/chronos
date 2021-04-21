@@ -31,7 +31,7 @@ export class FeatureRulesListComponent implements OnInit {
       });  
   }
 
-  onDelete(id: string): void {
+  onDelete(id: number): void {
     this.featureRulesService.delete(id)
       .pipe(takeUntil(this.destroy))
       .subscribe(() => {

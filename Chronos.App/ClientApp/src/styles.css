@@ -63,3 +63,19 @@ svg {
   border: 0.5em solid currentColor;
   border-right-color: transparent;
 }
+
+.ngx-datatable.material {
+  box-shadow: none;
+}
+
+.ngx-datatable.scroll-vertical .datatable-body {
+  overflow-x: hidden;
+}
+
+.datatable-row-wrapper, .datatable-body-row, .datatable-row-center {
+  width: 100% !important;
+}
+
+.dropdown-menu {
+  width: max-content;
+}

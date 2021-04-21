@@ -1,4 +1,4 @@
-<nav class="nav flex-column h-100 navbar-light bg-light overflow-hidden" [ngStyle]="{ 'width.em': collapsed ? '3.5' : '12' }">
+<nav class="nav flex-column h-100 navbar-light bg-light overflow-hidden" [ngStyle]="{ 'width.em': collapsed ? '3.5' : '14' }">
     <div>
         <div>
             <a class="nav-link d-flex align-items-center" [routerLink]="['/']">
@@ -16,14 +16,14 @@
     <div class="separator"></div>
     <div class="flex-grow-1">
         <div>
-            <a class="nav-link d-flex align-items-center" [routerLink]="['/']">
+            <a class="nav-link d-flex align-items-center" [routerLink]="['/requests-of-work']">
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
                         <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"/>
                     </svg>
                 </span>
                 <span *ngIf="!collapsed" class="ml-2">
-                    Home
+                    Requests Of Work
                 </span>            
             </a>
         </div>
@@ -61,8 +61,8 @@
         </div>
     </div>
     <div class="separator"></div>
-    <div [ngClass]="{'flex-row': !collapsed, 'flex-column': collapsed}" class="d-flex flex-row align-items-center">
-        <a class="nav-link d-flex align-items-center" [routerLink]="['/']">
+    <div [ngClass]="{'flex-row': !collapsed, 'flex-column': collapsed}" class="d-flex flex-row w-100 align-items-center">
+        <a class="nav-link d-flex flex-grow-1 align-items-center" [routerLink]="['/']">
             <span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
                     <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"/>
@@ -72,7 +72,7 @@
                 Settings
             </span>  
         </a>
-        <div [ngClass]="{'mb-2': collapsed}" class="collapse-button w-100 d-flex justify-content-center" (click)="collapsed = !collapsed">
+        <div [ngClass]="{'mb-2': collapsed}" class="collapse-button d-flex justify-content-center" (click)="collapsed = !collapsed">
             <div *ngIf="!collapsed">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>

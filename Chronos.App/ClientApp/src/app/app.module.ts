@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 import { QuillModule } from 'ngx-quill';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 import { AppComponent } from './app.component';
 import { AuthenticatedGuard } from './guard/authenticated.guard';
@@ -25,6 +27,8 @@ import { FeatureRulesComponent } from './component/rules/feature-rules/feature-r
 import { StoryRulesComponent } from './component/rules/story-rules/story-rules.component';
 import { TaskRulesComponent } from './component/rules/task-rules/task-rules.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { RequestsOfWorkComponent } from './component/requests-of-work/requests-of-work.component';
+import { FilterComponent } from './component/filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     TagsComponent,
     StoryRulesComponent,
     TaskRulesComponent,
-    FeatureRulesListComponent
+    FeatureRulesListComponent,
+    RequestsOfWorkComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -52,6 +58,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
       { path: '', component: MainLayoutComponent, canActivate: [AuthenticatedGuard], children: [
         { path: '', component: HomeComponent, pathMatch: 'full'},
         { path: 'User/SignOut', component: SignOutComponent, pathMatch: 'full'},
+        { path: 'requests-of-work', component: RequestsOfWorkComponent},
         { path: 'feature-rules-list', component: FeatureRulesListComponent},
         { path: 'feature-rules', component: FeatureRulesComponent},
         { path: 'feature-rules/:id', component: FeatureRulesComponent}
@@ -75,7 +82,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
       }
     }),
     BsDropdownModule.forRoot(),
-    NgxDatatableModule
+    NgxDatatableModule,
+    TabsModule.forRoot(),
+    TooltipModule.forRoot()
   ],
   providers: [
     {

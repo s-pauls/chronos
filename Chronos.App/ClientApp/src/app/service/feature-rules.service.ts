@@ -19,7 +19,7 @@ export class FeatureRulesService {
     return this.httpClient.get(this.apiUrl);
   }
 
-  getById(id: string): Observable<FeatureRules>{
+  getById(id: number): Observable<FeatureRules>{
     return this.httpClient.get(`${this.apiUrl}/${id}`);
   }
 
@@ -31,11 +31,11 @@ export class FeatureRulesService {
     return this.httpClient.post(`${this.apiUrl}`, featureRules);
   }
 
-  update(id: string,featureRules: FeatureRules): Observable<any> {
+  update(id: number, featureRules: FeatureRules): Observable<any> {
     return this.httpClient.put(`${this.apiUrl}/${id}`, featureRules);
   }
 
-  delete(id: string): Observable<any> {
+  delete(id: number): Observable<any> {
     return this.httpClient.delete(`${this.apiUrl}/${id}`);
   }
 }

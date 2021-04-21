@@ -11,6 +11,11 @@ a:hover {
     cursor: pointer;
 }
 
+.collapse-button {
+    width: 15%;
+}
+
 a {
     height: 2.5em;
+    white-space: nowrap;
 }

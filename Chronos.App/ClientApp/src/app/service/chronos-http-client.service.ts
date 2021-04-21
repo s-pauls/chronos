@@ -41,7 +41,7 @@ export class ChronosHttpClientService {
     if (!options.headers) {
       options.headers = header;    
     }
-
+        
     return options;    
   }
 }

@@ -1,0 +1,55 @@
+.left-panel {
+    width: 60%;
+}
+
+.right-panel {
+    width: 40%;
+}
+
+.bottom-panel {
+    height: 90%;
+}
+
+::ng-deep .tab-content {
+    border-left: 1px solid  #dee2e6;
+    border-right: 1px solid  #dee2e6;
+    border-bottom: 1px solid  #dee2e6;
+    padding: 1em;
+    overflow: auto;
+    height: 100%;
+}
+
+::ng-deep .tab-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.title {
+    margin-bottom: 0;
+    line-height: 2;
+    white-space: nowrap;
+}
+
+.author-container {
+    float: left;
+    width: 2.5em;
+    height: 2.5em;
+    background: darkblue;
+    color: white;
+    margin-right: 0.3em;
+    margin-left: 0.3em;
+}
+
+.author {
+    height: 2.5em;
+    width: 2.5em;
+    padding-right: .15em;
+    padding-bottom: .2em;
+}
+
+.message {
+    word-break: break-all;
+}
+
+

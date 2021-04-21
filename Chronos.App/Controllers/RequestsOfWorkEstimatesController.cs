@@ -16,7 +16,7 @@ using ApiContract = Chronos.App.DataContracts.Estimates;
 namespace Chronos.App.Controllers
 {
     [Authorize]
-    [Microsoft.AspNetCore.Components.Route("api/requests-of-work")]
+    [Route("api/requests-of-work")]
     [ApiController]
     public class RequestsOfWorkEstimatesController : ControllerBase
     {

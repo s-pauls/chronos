@@ -13,7 +13,7 @@ import { FeatureRulesService } from 'src/app/service';
 })
 export class FeatureRulesComponent implements OnInit, OnDestroy {
   private destroy: Subject<void> = new Subject<void>();
-  private id = '';
+  private id = 0;
 
   featureRules: FeatureRules = null;
 
@@ -22,7 +22,7 @@ export class FeatureRulesComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private featureRulesService: FeatureRulesService
     ) {
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.id = Number.parseInt(this.route.snapshot.paramMap.get('id'));
   }
 
   ngOnInit(): void {

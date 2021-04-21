@@ -1,0 +1,99 @@
+<div *ngIf="!requestsOfWork || !selectedRequestOfWork || !requestOfWorkFilters" class="d-flex justify-content-center align-items-center h-100">
+    <div class="spinner-border">
+    </div>
+</div>
+<div *ngIf="requestsOfWork && selectedRequestOfWork && requestOfWorkFilters" id="requestsOfWork" class="d-flex flex-column h-100 p-3">
+    <div class="left-panel d-flex align-items-center mb-3">
+        <div>
+            <h5 class="title mr-2">Requests Of Work</h5>
+        </div>
+        <div class="w-75 ml-auto filter">
+            <app-filter [filterItems]="requestOfWorkFilters" (selectionChanged)="onSelectionChanged($event)"></app-filter>
+        </div>
+    </div>
+    <div class="d-flex h-100 overflow-hidden">
+        <div class="left-panel h-100">
+            <ngx-datatable
+                class="material border h-100"
+                [rows]="requestsOfWork"
+                [columnMode]="columnMode.force"
+                [headerHeight]="50"
+                [rowHeight]="50"
+                [footerHeight]="50"
+                [scrollbarV]="true"
+                [selected]="selectedRequestOfWork"
+                [selectionType]="selectionType.single"
+                (select)="onSelect($event)">
+                <ngx-datatable-column name="Number" prop="fullNumber" ></ngx-datatable-column>
+                <ngx-datatable-column name="Product" prop="productName"></ngx-datatable-column>
+                <ngx-datatable-column name="Name" prop="name"></ngx-datatable-column>
+                <ngx-datatable-column name="Priority" prop="priority"></ngx-datatable-column>
+                <ngx-datatable-column name="Status" prop="statusName"></ngx-datatable-column>
+            </ngx-datatable>
+        </div>
+        <div class="right-panel">
+            <div class="ml-3 p-3 border h-100">
+                <div *ngIf="selectedRequestOfWork && selectedRequestOfWork.length > 0" class="d-flex flex-column h-100">
+                    <div class="mb-2">
+                        <h5 class="title">{{ selectedRequestOfWork[0].name }}</h5>
+                    </div>                
+                    <div class="d-flex flex-grow-1 overflow-hidden h-100">
+                        <tabset [justified]="true">
+                            <tab heading="Estimates" [ngStyle]="{ 'height': !estimates ? '100%' : '' }">
+                                <div *ngIf="!estimates" class="d-flex justify-content-center align-items-center h-100">
+                                    <div class="spinner-border">
+                                    </div>
+                                </div>
+                                <div *ngIf="estimates">
+                                    <div *ngFor="let estimate of estimates">
+                                        <div class="d-flex">
+                                            <div class="mr-3">
+                                                {{ estimate.version }}
+                                            </div>
+                                            <!-- <div class="mr-3">
+                                                <a [attr.href]="estimate.featureDefinitionDocumentUrl">Feature Definition Document</a>
+                                            </div>
+                                            <div class="mr-3">
+                                                <a [attr.href]="estimate.designDocumentUrl">Design Document</a>
+                                            </div> -->
+                                            <div>
+                                                {{ estimate.grandTotal }}
+                                            </div>
+                                        </div>
+                                        <div class="separator"></div>
+                                    </div>
+                                </div>
+                            </tab>
+                            <tab heading="Comments" [ngStyle]="{ 'height': !comments ? '100%' : '' }">
+                                <div *ngIf="!comments" class="d-flex justify-content-center align-items-center h-100">
+                                    <div class="spinner-border">
+                                    </div>
+                                </div>
+                                <div *ngIf="comments">
+                                    <textarea class="form-control mb-3 w-100" placeholder="Add a comment..." (keydown.enter)="onEnter($event.target)"></textarea>
+                                    <div *ngFor="let comment of comments">
+                                        <div class="d-flex mb-3">
+                                            <div class="mr-2 w-100">
+                                                <div class="border rounded-circle author-container">
+                                                    <div class="d-flex justify-content-center align-items-center author">
+                                                        {{ getInitials(comment.userName) }}
+                                                    </div>
+                                                </div>
+                                                <span class="message">
+                                                    {{ comment.message }}
+                                                </span>
+                                            </div>
+                                            <div class="align-self-start ml-auto"  tooltip="{{ comment.dateTime }}" >
+                                                {{ comment.dateTime.toLocaleString('en-us', {  weekday: 'long' }) }}
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </div>
+                            </tab>
+                        </tabset>
+                    </div>
+                </div>                
+            </div> 
+        </div>
+    </div>  
+</div>
