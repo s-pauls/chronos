@@ -29,7 +29,7 @@ export class RequestsOfWorkComponent implements OnInit, OnDestroy {
   comments: CommentModel[] = null;
   products: Product[] = null;
   requestOfWorkFilter: RequestOfWorkFilter = null;
-  requestOfWorkFilters: Filter[] = null;
+  requestOfWorkFilters: Filter<string | number>[] = null;
 
   constructor(
     private productService: ProductService,
@@ -70,7 +70,7 @@ export class RequestsOfWorkComponent implements OnInit, OnDestroy {
     this.showModal(FixRequestComponent, () => this.loadRequestsOfWork(), initialState);
   }
 
-  onSelectionChanged(filters: Filter[]): void {
+  onSelectionChanged(filters: Filter<string | number>[]): void {
     this.requestOfWorkFilter = new RequestOfWorkFilter();
 
     filters.forEach(filter => {
@@ -166,7 +166,7 @@ export class RequestsOfWorkComponent implements OnInit, OnDestroy {
     ])
     .pipe(takeUntil(this.destroy))
     .subscribe((results) => {
-      let filters: Filter[] = [];
+      let filters: Filter<string | number>[] = [];
 
       this.products = results[0];
 
@@ -174,7 +174,7 @@ export class RequestsOfWorkComponent implements OnInit, OnDestroy {
         name: 'Product',
         checkedItems: results[0].map((product) => {
           return new CheckedItem({
-            id: product.id,
+            id: product.uid,
             value: product.name
           });
         })
@@ -267,7 +267,7 @@ export class RequestsOfWorkComponent implements OnInit, OnDestroy {
       });
   }
 
-  private fillArrayByCheckedItems(filter: Filter,  array: number[]): void {
+  private fillArrayByCheckedItems<T>(filter: Filter<T>,  array: T[]): void {
     if (filter.anyChecked) {      
       filter.checkedItems.forEach(checkedItem => {
         if (checkedItem.checked) {

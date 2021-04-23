@@ -6,11 +6,14 @@
 
   <ItemGroup>
     <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="Organization.WebApi.Client" Version="1.0.0" />
+    <PackageReference Include="Organization.WebApi.PublicDataContract" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Chronos.Data\Chronos.Data.csproj" />
     <ProjectReference Include="..\Chronos.Domain\Chronos.Domain.csproj" />
+    <ProjectReference Include="..\Chronos.Utilities\Chronos.Utilities.csproj" />
   </ItemGroup>
 
   <ItemGroup>

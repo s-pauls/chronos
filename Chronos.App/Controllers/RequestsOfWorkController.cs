@@ -50,16 +50,16 @@ namespace Chronos.App.Controllers
         [HttpGet("statuses")]
         public async Task<ApiListResponse<ApiContract.RequestOfWorkStatusItem>> GetRequestOfWorkStatuses()
         {
-            var item = await _requestOfWorkService.GetStatusListAsync();
-            var apiData = _mapper.Map<ApiContract.RequestOfWorkStatusItem[]>(item);
+            var list = await _requestOfWorkService.GetStatusListAsync();
+            var apiData = _mapper.Map<ApiContract.RequestOfWorkStatusItem[]>(list);
             return new ApiListResponse<ApiContract.RequestOfWorkStatusItem>(apiData);
         }
 
         [HttpGet("types")]
         public async Task<ApiListResponse<ApiContract.RequestOfWorkTypeItem>> GetRequestOfWorkTypes()
         {
-            var item = await _requestOfWorkService.GetTypeListAsync();
-            var apiData = _mapper.Map<ApiContract.RequestOfWorkTypeItem[]>(item);
+            var list = await _requestOfWorkService.GetTypeListAsync();
+            var apiData = _mapper.Map<ApiContract.RequestOfWorkTypeItem[]>(list);
             return new ApiListResponse<ApiContract.RequestOfWorkTypeItem>(apiData);
         }
 

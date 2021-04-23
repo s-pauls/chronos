@@ -8,9 +8,9 @@ import { Filter } from 'src/app/models';
 })
 export class FilterComponent implements OnInit {
 
-  @Input() filterItems: Filter[] = [];
+  @Input() filterItems: Filter<string | number>[] = [];
 
-  @Output() selectionChanged = new EventEmitter<Filter[]>();
+  @Output() selectionChanged = new EventEmitter<Filter<string | number>[]>();
 
   constructor() { }
 

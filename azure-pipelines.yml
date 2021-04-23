@@ -14,8 +14,16 @@ variables:
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
 
 steps:
-- script: dotnet restore 
+- task: NuGetToolInstaller@1
+  inputs:
+    checkLatest: true
+- task: NuGetCommand@2
   displayName: 'dotnet restore'
+  inputs:
+    command: 'restore'
+    restoreSolution: '**/*.sln'
+    feedsToUse: 'config'
+    nugetConfigPath: './Nuget.config'
 
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'

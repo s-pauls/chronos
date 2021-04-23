@@ -1,24 +1,35 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using Chronos.Data;
 using Chronos.Domain.Entities.Products;
 using Chronos.Domain.Interfaces;
+using Organization.WebApi.Client.Products;
+using DomainModels = Chronos.Domain.Entities.Products;
 
 namespace Chronos.Core
 {
     public class ProductService : IProductService
     {
-        private readonly IProductRepository _productRepository;
+        private readonly IProductsClient _productsClient;
 
         public ProductService(
-            IProductRepository productRepository)
+            IProductsClient productsClient)
         {
-            _productRepository = productRepository;
+            _productsClient = productsClient;
         }
 
-        public async Task<List<Product>> GetProducts(ProductFilter filter)
+        public async Task<Product[]> GetProducts(ProductFilter filter)
         {
-            return await _productRepository.GetProducts(filter);
+            var products = await _productsClient.GetProductsAsync();
+
+            return products.Select(x => new DomainModels.Product
+            {
+                Uid = x.Uid,
+                Name = x.ProductName,
+                ProjectUid = x.ProjectUid,
+                ProjectName = x.ProjectName,
+                ProjectAdoName = x.ProjectAdoName,
+                Enabled = x.Enabled
+            }).ToArray();
         }
 
     }

@@ -27,7 +27,7 @@ namespace Chronos.App.Controllers
             var products = await _productService.GetProducts(new ProductFilter { Enabled = true });
             var apiData = products.Select(product => new DataContracts.Product
             {
-                Id = product.Id,
+                Uid = product.Uid,
                 Name = product.Name
             }).ToArray();
             return new ApiListResponse<DataContracts.Product>(apiData);

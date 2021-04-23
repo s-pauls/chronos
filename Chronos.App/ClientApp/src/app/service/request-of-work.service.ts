@@ -61,25 +61,14 @@ export class RequestOfWorkService {
   }
 
   addStatementOfWork(statementOfWork: StatementOfWorkForAdd): Observable<any> {
-    return this.httpClient.post(`${this.apiUrl}/statement-of-work`, {
-      productId: statementOfWork.productId.toString(),
-      name: statementOfWork.name
-    });
+    return this.httpClient.post(`${this.apiUrl}/statement-of-work`, statementOfWork);
   }
 
   addFeatureDefinitionDocument(featureDefinitionDocument: FeatureDefinitionDocumentForAdd): Observable<any> {
-    return this.httpClient.post(`${this.apiUrl}/feature-definition-document`, {
-      productId: featureDefinitionDocument.productId.toString(),
-      name: featureDefinitionDocument.name,
-      numberSuffix: featureDefinitionDocument.numberSuffix
-    });
+    return this.httpClient.post(`${this.apiUrl}/feature-definition-document`, featureDefinitionDocument);
   }
 
   addFixRequest(fixRequest: FixRequestForAdd): Observable<any> {
-    return this.httpClient.post(`${this.apiUrl}/fix-request`, {
-      productId: fixRequest.productId.toString(),
-      name: fixRequest.name,
-      isPartner: fixRequest.isPartner
-    });
+    return this.httpClient.post(`${this.apiUrl}/fix-request`, fixRequest);
   }
 }

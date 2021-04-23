@@ -4,7 +4,7 @@ export class RequestOfWorkFilter {
     requestOfWorkIds: number[] = [];
     statusIds: RequestOfWorkStatus[] = [];
     typeIds: RequestOfWorkType[] = [];
-    productIds: number[] = [];
+    productIds: string[] = [];
 
     constructor(obj?: Partial<RequestOfWorkFilter>) {
         if (obj)

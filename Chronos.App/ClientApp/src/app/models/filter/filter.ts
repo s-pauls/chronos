@@ -1,11 +1,11 @@
 import { CheckedItem } from "./checked-item";
 
-export class Filter {
+export class Filter<T> {
     name = '';
-    checkedItems: CheckedItem[] = []
+    checkedItems: CheckedItem<T>[] = []
     anyChecked = false;
 
-    constructor(obj?: Partial<Filter>) {
+    constructor(obj?: Partial<Filter<T>>) {
         if (obj)
             Object.assign(this, obj);
     }

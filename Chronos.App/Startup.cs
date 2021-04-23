@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Organization.WebApi.Client.Extensions;
 
 namespace Chronos.App
 {
@@ -55,12 +56,15 @@ namespace Chronos.App
                 .AddChronosCore()
                 .AddChronosDbContext(Configuration)
                 .AddAutoMapper(typeof(Startup))
-                .AddMediatR(typeof(RequestOfWorkService).Assembly);
+                .AddMediatR(typeof(RequestOfWorkService).Assembly)
+                .AddSettings(Configuration)
+                .AddOrganizationClients();
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Organization.WebApi", Version = "v1" });
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

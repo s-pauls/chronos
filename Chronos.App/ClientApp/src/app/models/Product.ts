@@ -1,4 +1,4 @@
 export class Product {
-    id = 0;
+    uid = '';
     name = '';
 }

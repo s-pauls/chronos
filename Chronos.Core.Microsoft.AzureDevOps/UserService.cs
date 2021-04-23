@@ -1,9 +1,8 @@
-﻿using Chronos.Core.Microsoft.AzureDevOps.Extensions;
-using Chronos.Domain.Entities;
-using Chronos.Domain.Interfaces;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
+using Chronos.Core.Microsoft.AzureDevOps.Extensions;
 using Chronos.Domain.Entities.User;
+using Chronos.Domain.Interfaces;
 
 namespace Chronos.Core.Microsoft.AzureDevOps
 {

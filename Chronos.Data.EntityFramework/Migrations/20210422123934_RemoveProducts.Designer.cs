@@ -4,14 +4,16 @@ using Chronos.Data.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Chronos.Data.EntityFramework.Migrations
 {
     [DbContext(typeof(ChronosDbContext))]
-    partial class ChronosDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210422123934_RemoveProducts")]
+    partial class RemoveProducts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,9 +71,6 @@ namespace Chronos.Data.EntityFramework.Migrations
                     b.Property<double>("GrandTotal")
                         .HasColumnType("float");
 
-                    b.Property<int>("RequestOfWorkId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Version")
                         .IsRequired()
                         .HasMaxLength(10)
@@ -80,8 +79,6 @@ namespace Chronos.Data.EntityFramework.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EstimateTemplateId");
-
-                    b.HasIndex("RequestOfWorkId");
 
                     b.ToTable("Estimates");
                 });
@@ -92,12 +89,6 @@ namespace Chronos.Data.EntityFramework.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Assumptions")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Discipline")
-                        .HasColumnType("int");
 
                     b.Property<int>("EstimateId")
                         .HasColumnType("int");
@@ -124,20 +115,25 @@ namespace Chronos.Data.EntityFramework.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Discipline")
+                        .HasColumnType("int");
+
                     b.Property<int>("EstimateItemId")
                         .HasColumnType("int");
 
-                    b.Property<double>("Hours")
-                        .HasColumnType("float");
-
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(450)
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<double>("Value")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EstimateItemId");
+
+                    b.HasIndex("Name", "Discipline", "EstimateItemId")
+                        .IsUnique();
 
                     b.ToTable("EstimateItemTasks");
                 });
@@ -339,21 +335,13 @@ namespace Chronos.Data.EntityFramework.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Chronos.Data.EntityFramework.Entities.RequestOfWorkEntity", "RequestOfWork")
-                        .WithMany()
-                        .HasForeignKey("RequestOfWorkId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("EstimateTemplate");
-
-                    b.Navigation("RequestOfWork");
                 });
 
             modelBuilder.Entity("Chronos.Data.EntityFramework.Entities.EstimateItemEntity", b =>
                 {
                     b.HasOne("Chronos.Data.EntityFramework.Entities.EstimateEntity", "Estimate")
-                        .WithMany("EstimateItems")
+                        .WithMany()
                         .HasForeignKey("EstimateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -364,7 +352,7 @@ namespace Chronos.Data.EntityFramework.Migrations
             modelBuilder.Entity("Chronos.Data.EntityFramework.Entities.EstimateItemTaskEntity", b =>
                 {
                     b.HasOne("Chronos.Data.EntityFramework.Entities.EstimateItemEntity", "EstimateItem")
-                        .WithMany("EstimateTasks")
+                        .WithMany()
                         .HasForeignKey("EstimateItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -414,16 +402,6 @@ namespace Chronos.Data.EntityFramework.Migrations
                         .HasForeignKey("Chronos.Data.EntityFramework.Entities.StatementOfWorkEntity", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Chronos.Data.EntityFramework.Entities.EstimateEntity", b =>
-                {
-                    b.Navigation("EstimateItems");
-                });
-
-            modelBuilder.Entity("Chronos.Data.EntityFramework.Entities.EstimateItemEntity", b =>
-                {
-                    b.Navigation("EstimateTasks");
                 });
 
             modelBuilder.Entity("Chronos.Data.EntityFramework.Entities.RequestOfWorkEntity", b =>

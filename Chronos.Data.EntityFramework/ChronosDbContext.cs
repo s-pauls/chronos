@@ -10,7 +10,6 @@ namespace Chronos.Data.EntityFramework
         {
         }
 
-        public DbSet<ProductEntity> Products { get; set; }
         public DbSet<FeatureRulesEntity> FeatureRules { get; set; }
         public DbSet<FeatureBlankEntity> FeatureBlank { get; set; }
         public DbSet<RequestOfWorkEntity> RequestsOfWork { get; set; }
@@ -24,7 +23,6 @@ namespace Chronos.Data.EntityFramework
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new AuditLogEntityConfiguration());
-            modelBuilder.ApplyConfiguration(new ProductEntityConfiguration());
             modelBuilder.ApplyConfiguration(new FeatureRulesEntityConfiguration());
 
             modelBuilder.ApplyConfiguration(new RequestOfWorkEntityConfiguration());
