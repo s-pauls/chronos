@@ -44,7 +44,7 @@ namespace Chronos.App.Controllers
         }
 
         [HttpPost("{requestOfWorkId:int}/estimates/{estimateTemplateId:int}"), DisableRequestSizeLimit]
-        public async Task<IActionResult> PostAsync([FromRoute] int requestOfWorkId, [FromRoute] int estimateTemplateId, IFormFile file)
+        public async Task<IActionResult> PostAsync([FromRoute] int requestOfWorkId, [FromRoute] int estimateTemplateId, [FromQuery] string version, IFormFile file)
         {
             if (file.Length > 0)
             {
@@ -67,7 +67,8 @@ namespace Chronos.App.Controllers
                     {
                         FilePath = tempFileName,
                         RequestOfWorkId = requestOfWorkId,
-                        EstimateTemplateId = estimateTemplateId
+                        EstimateTemplateId = estimateTemplateId,
+                        Version = version
                     });
                 }
                 finally

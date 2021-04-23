@@ -1,6 +1,7 @@
 export * from './app-config.service'
 export * from './auth.service'
 export * from './chronos-http-client.service'
+export * from './estimate-template.service'
 export * from './feature-rules.service'
 export * from './product.service'
 export * from './request-of-work.service'

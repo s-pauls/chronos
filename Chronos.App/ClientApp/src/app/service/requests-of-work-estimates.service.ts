@@ -20,4 +20,11 @@ export class RequestsOfWorkEstimatesService {
   getList(requestOfWorkId: number): Observable<Estimate[]> {
     return this.httpClient.get(`${this.apiUrl}/${requestOfWorkId}/estimates`);
   }
+
+  add(requestOfWorkId: number, estimateTemplateId: number, version: string, file: File): Observable<any> {   
+    let formData = new FormData();
+    formData.append('file', file, file.name);
+
+    return this.httpClient.post(`${this.apiUrl}/${requestOfWorkId}/estimates/${estimateTemplateId}?version=${version}`, formData);
+  }
 }

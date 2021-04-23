@@ -20,4 +20,8 @@ export class RequestsOfWorkCommentsService {
   getList(requestOfWorkId: number): Observable<CommentModel[]> {
     return this.httpClient.get(`${this.apiUrl}/${requestOfWorkId}/comments`);
   }
+
+  add(requestOfWorkId: number, comment: string): Observable<CommentModel[]> {
+    return this.httpClient.post(`${this.apiUrl}/${requestOfWorkId}/comments`, { message: comment });
+  }
 }

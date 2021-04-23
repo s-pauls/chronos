@@ -10,6 +10,8 @@ namespace Chronos.App.Mappings
         {
             CreateMap<DomainModels.Estimate, ApiContract.Estimate>()
                 .ForMember(x => x.EstimateId, opt => opt.MapFrom(src => src.Id));
+
+            CreateMap<DomainModels.EstimateTemplate, ApiContract.EstimateTemplate>();
         }
     }
 }

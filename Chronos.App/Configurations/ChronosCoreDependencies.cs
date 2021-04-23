@@ -30,7 +30,9 @@ namespace Chronos.App.Configurations
                 .AddScoped<IAzureWorkItemClient, AzureWorkItemClient>()
                 .AddScoped<IEstimateRepository, EstimateRepository>()
                 .AddScoped<IEstimateService, EstimateService>()
-                .AddScoped<IEstimateParser, PointSolutionsEstimateParser>();
+                .AddScoped<IEstimateParser, PointSolutionsEstimateParser>()
+                .AddScoped<IEstimateTemplateRepository, EstimateTemplateRepository>()
+                .AddScoped<IEstimateTemplateService, EstimateTemplateService>();
 
             services.AddHttpClient<IUserService, UserService>();
 

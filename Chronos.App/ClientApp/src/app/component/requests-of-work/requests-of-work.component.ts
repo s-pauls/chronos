@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { forkJoin, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CheckedItem, CommentModel, Estimate, Filter, RequestOfWork, RequestOfWorkFilter } from 'src/app/models';
 import { AuthService, ProductService, RequestOfWorkService, RequestsOfWorkCommentsService, RequestsOfWorkEstimatesService, User } from 'src/app/service';
+import { EstimateModalComponent } from '../estimate-modal/estimate-modal.component';
 
 @Component({
   selector: 'app-requests-of-work',
@@ -13,6 +15,7 @@ import { AuthService, ProductService, RequestOfWorkService, RequestsOfWorkCommen
 export class RequestsOfWorkComponent implements OnInit, OnDestroy {
   private destroy: Subject<void> = new Subject<void>();
   private user: User = null;
+  private bsModalRef: BsModalRef = null;
 
   columnMode = ColumnMode;
   selectionType = SelectionType;
@@ -29,6 +32,7 @@ export class RequestsOfWorkComponent implements OnInit, OnDestroy {
     private requestOfWorkService: RequestOfWorkService,
     private requestsOfWorkEstimatesService: RequestsOfWorkEstimatesService,    
     private requestsOfWorkCommentsService: RequestsOfWorkCommentsService,
+    private modalService: BsModalService
   ) {
     this.authService
       .user()
@@ -78,20 +82,53 @@ export class RequestsOfWorkComponent implements OnInit, OnDestroy {
 
   onEnter(textarea: HTMLTextAreaElement): void {
     if (textarea.value) {
-      this.comments.unshift({
-        commentId: 0,
-        userName: this.user.displayName,
-        dateTime: new Date(),
-        message: textarea.value,
-        isCustom: true
-      });
-  
-      textarea.value = null;
+      var message = textarea.value;
+      textarea.value = null;     
       textarea.blur();
+
+      this.requestsOfWorkCommentsService
+        .add(this.selectedRequestOfWork[0].requestOfWorkId, message)
+        .pipe(takeUntil(this.destroy))
+        .subscribe(() => {
+          this.initComments();          
+        });
     }
   }
 
+  onAddEstimate(): void {
+    let config = {
+      animated: false,
+      class: 'message-box modal-dialog-centered',
+      initialState: {
+        requestOfWorkName: this.selectedRequestOfWork[0].name
+      }      
+    };
+
+    this.bsModalRef = this.modalService.show(EstimateModalComponent, config);
+    this.bsModalRef.onHide
+      .pipe(takeUntil(this.destroy))
+      .subscribe((result) => {
+        console.log(result);
+        if (result && result.success) {
+          this.initEstimatesAndComments();
+        }
+      });
+  }
+  
+  //todo
+  getDate(date: string): Date {
+    return new Date(date);
+    }
+
+  //todo
+  getDayOfWeek(date: string): string {
+    return new Date(date).toLocaleString('en-us', {  weekday: 'long' });
+  }
+
   getInitials(userName: string): string {
+    if (!userName)
+      return '';
+
     return userName.split(' ').reduce((previousValue, currentValue) => previousValue + currentValue[0], '');
   }
 
@@ -101,6 +138,7 @@ export class RequestsOfWorkComponent implements OnInit, OnDestroy {
       this.requestOfWorkService.getStatuses(),
       this.requestOfWorkService.getTypes()
     ])
+    .pipe(takeUntil(this.destroy))
     .subscribe((results) => {
       let filters: Filter[] = [];
 
@@ -148,20 +186,29 @@ export class RequestsOfWorkComponent implements OnInit, OnDestroy {
   }
 
   private initEstimatesAndComments(): void {
+    this.initEstimates();
+    this.initComments();
+  }
+
+  private initEstimates(): void {
     this.estimates = null;
     this.comments = null;
 
     let selectedRequestOfWork = this.selectedRequestOfWork[0];
 
     this.requestsOfWorkEstimatesService
-      .getList(selectedRequestOfWork.requestOfWorkId)
+      .getList(this.selectedRequestOfWork[0].requestOfWorkId)
       .pipe(takeUntil(this.destroy))
       .subscribe((result) => {
         this.estimates = result;
       });
+  }
+
+  private initComments(): void {
+    this.comments = null;
 
     this.requestsOfWorkCommentsService
-      .getList(selectedRequestOfWork.requestOfWorkId)
+      .getList(this.selectedRequestOfWork[0].requestOfWorkId)
       .pipe(takeUntil(this.destroy))
       .subscribe((result) => {
         this.comments = result;
@@ -176,6 +223,10 @@ export class RequestsOfWorkComponent implements OnInit, OnDestroy {
         }
       });
     }
+  }
+
+  getRowClass(row): string {
+    return 'border-bottom';
   }
 
   ngOnDestroy(): void {

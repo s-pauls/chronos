@@ -29,7 +29,7 @@ namespace Chronos.Core.Estimates
             {
                 RequestOfWorkId = request.RequestOfWorkId,
                 EstimateTemplateId = request.EstimateTemplateId,
-                Version = new Version("1.0"),
+                Version = new Version(request.Version),
             };
 
             var data = _estimateParser.Parse(request.FilePath);

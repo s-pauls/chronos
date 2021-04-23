@@ -14,7 +14,7 @@ export class ChronosHttpClientService {
 
   get<T>(url: string, options?: any): Observable<T> {
     return this.httpClient.get<ApiResponse<T>>(url, this.appendOptionsByPartnerName(options))
-      .pipe(map(result => {        
+      .pipe(map(result => {
         return result.data;
       }));
   }

@@ -8,6 +8,7 @@ import { QuillModule } from 'ngx-quill';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppComponent } from './app.component';
 import { AuthenticatedGuard } from './guard/authenticated.guard';
@@ -29,6 +30,7 @@ import { TaskRulesComponent } from './component/rules/task-rules/task-rules.comp
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { RequestsOfWorkComponent } from './component/requests-of-work/requests-of-work.component';
 import { FilterComponent } from './component/filter/filter.component';
+import { EstimateModalComponent } from './component/estimate-modal/estimate-modal.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import { FilterComponent } from './component/filter/filter.component';
     TaskRulesComponent,
     FeatureRulesListComponent,
     RequestsOfWorkComponent,
-    FilterComponent
+    FilterComponent,
+    EstimateModalComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -84,7 +87,8 @@ import { FilterComponent } from './component/filter/filter.component';
     BsDropdownModule.forRoot(),
     NgxDatatableModule,
     TabsModule.forRoot(),
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [
     {
