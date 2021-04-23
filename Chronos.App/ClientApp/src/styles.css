@@ -79,3 +79,7 @@ svg {
 .dropdown-menu {
   width: max-content;
 }
+
+.dropdown-item:hover {
+  cursor: pointer;
+}

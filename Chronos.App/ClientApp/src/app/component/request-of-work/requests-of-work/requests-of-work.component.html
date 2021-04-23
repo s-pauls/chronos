@@ -3,11 +3,29 @@
     </div>
 </div>
 <div *ngIf="requestsOfWork && selectedRequestOfWork && requestOfWorkFilters" id="requestsOfWork" class="d-flex flex-column h-100 p-3">
-    <div class="left-panel d-flex align-items-center mb-3">
+    <div class="left-panel d-flex align-items-center mb-2">
         <div>
             <h5 class="title mr-2">Requests Of Work</h5>
         </div>
-        <div class="w-75 ml-auto filter">
+        <div class="d-flex ml-auto">
+            <div dropdown class="btn-group">
+                <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">Add</button>
+                <ul *dropdownMenu class="dropdown-menu dropdown-menu-right">
+                    <li>
+                        <span class="dropdown-item" (click)="onAddFeatureDefinitionDocument()">Feature Definition Document</span>  
+                    </li>
+                    <li>
+                        <span class="dropdown-item" (click)="onAddStatementOfWorkt()">Statement Of Work</span>  
+                    </li>
+                    <li>
+                        <span class="dropdown-item" (click)="onAddFixRequest()">Fix Request</span>  
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="left-panel d-flex mb-2">
+        <div class="w-100">
             <app-filter [filterItems]="requestOfWorkFilters" (selectionChanged)="onSelectionChanged($event)"></app-filter>
         </div>
     </div>

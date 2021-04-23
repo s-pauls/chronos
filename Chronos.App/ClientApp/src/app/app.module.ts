@@ -28,9 +28,12 @@ import { FeatureRulesComponent } from './component/rules/feature-rules/feature-r
 import { StoryRulesComponent } from './component/rules/story-rules/story-rules.component';
 import { TaskRulesComponent } from './component/rules/task-rules/task-rules.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { RequestsOfWorkComponent } from './component/requests-of-work/requests-of-work.component';
+import { RequestsOfWorkComponent } from './component/request-of-work/requests-of-work/requests-of-work.component';
 import { FilterComponent } from './component/filter/filter.component';
-import { EstimateModalComponent } from './component/estimate-modal/estimate-modal.component';
+import { EstimateComponent } from './component/request-of-work/estimate/estimate.component';
+import { FeatureDefinitionDocumentComponent } from './component/request-of-work/feature-definition-document/feature-definition-document.component';
+import { StatementOfWorkComponent } from './component/request-of-work/statement-of-work/statement-of-work.component';
+import { FixRequestComponent } from './component/request-of-work/fix-request/fix-request.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,10 @@ import { EstimateModalComponent } from './component/estimate-modal/estimate-moda
     FeatureRulesListComponent,
     RequestsOfWorkComponent,
     FilterComponent,
-    EstimateModalComponent
+    EstimateComponent,
+    FeatureDefinitionDocumentComponent,
+    StatementOfWorkComponent,
+    FixRequestComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

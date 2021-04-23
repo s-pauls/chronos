@@ -1,9 +1,18 @@
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RequestOfWork, RequestOfWorkFilter, RequestOfWorkStatusItem, RequestOfWorkTypeItem } from '../models';
 import { AppConfigService } from './app-config.service';
 import { ChronosHttpClientService } from './chronos-http-client.service';
+
+import { 
+  FeatureDefinitionDocumentForAdd, 
+  FixRequestForAdd,
+  RequestOfWork, 
+  RequestOfWorkFilter, 
+  RequestOfWorkStatusItem, 
+  RequestOfWorkTypeItem, 
+  StatementOfWorkForAdd 
+} from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -49,5 +58,28 @@ export class RequestOfWorkService {
 
   getTypes(): Observable<RequestOfWorkTypeItem[]> {
     return this.httpClient.get(`${this.apiUrl}/types`);
+  }
+
+  addStatementOfWork(statementOfWork: StatementOfWorkForAdd): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/statement-of-work`, {
+      productId: statementOfWork.productId.toString(),
+      name: statementOfWork.name
+    });
+  }
+
+  addFeatureDefinitionDocument(featureDefinitionDocument: FeatureDefinitionDocumentForAdd): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/feature-definition-document`, {
+      productId: featureDefinitionDocument.productId.toString(),
+      name: featureDefinitionDocument.name,
+      numberSuffix: featureDefinitionDocument.numberSuffix
+    });
+  }
+
+  addFixRequest(fixRequest: FixRequestForAdd): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/fix-request`, {
+      productId: fixRequest.productId.toString(),
+      name: fixRequest.name,
+      isPartner: fixRequest.isPartner
+    });
   }
 }

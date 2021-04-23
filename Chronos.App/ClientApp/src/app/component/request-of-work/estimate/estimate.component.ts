@@ -6,13 +6,14 @@ import { EstimateTemplate } from 'src/app/models';
 import { EstimateTemplateService, RequestsOfWorkEstimatesService } from 'src/app/service';
 
 @Component({
-  selector: 'app-estimate-modal',
-  templateUrl: './estimate-modal.component.html',
-  styleUrls: ['./estimate-modal.component.css']
+  selector: 'app-estimate',
+  templateUrl: './estimate.component.html',
+  styleUrls: ['./estimate.component.css']
 })
-export class EstimateModalComponent implements OnInit {
+export class EstimateComponent implements OnInit {
   private destroy: Subject<void> = new Subject<void>();
 
+  requestOfWorkId = 0;
   requestOfWorkName = '';
   version = '';
   estimateTemplates: EstimateTemplate[] = [];
@@ -21,7 +22,7 @@ export class EstimateModalComponent implements OnInit {
 
   constructor(
     public bsModalRef: BsModalRef,
-    private readonly requestOfWorkerEstimatesService: RequestsOfWorkEstimatesService,
+    private readonly requestOfWorkEstimatesService: RequestsOfWorkEstimatesService,
     private readonly estimateTemplateService: EstimateTemplateService
   ) { }
 
@@ -38,8 +39,8 @@ export class EstimateModalComponent implements OnInit {
   }
 
   onSave(): void {
-    this.requestOfWorkerEstimatesService
-      .add(1, this.selectedEstimateTemplateValue, this.version, this.file)
+    this.requestOfWorkEstimatesService
+      .add(this.requestOfWorkId, this.selectedEstimateTemplateValue, this.version, this.file)
       .pipe(takeUntil(this.destroy))
       .subscribe(() => {
         this.bsModalRef.hide();
