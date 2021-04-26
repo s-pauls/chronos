@@ -9,7 +9,7 @@
         <label for="productSelect">Product</label>
         <select [(ngModel)]="statementOfWork.productId" class="custom-select" id="productSelect">
             <option value="0">Choose product</option>
-            <option *ngFor="let product of products" [ngValue]="product.id">{{ product.name }}</option>
+            <option *ngFor="let product of products" [ngValue]="product.uid">{{ product.name }}</option>
         </select>
     </div>
     <div class="form-group">

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Chronos.Data;
 using Chronos.Domain.Entities.FeatureRules;
@@ -23,7 +24,40 @@ namespace Chronos.Core
 
         public async Task<FeatureRules> GetByIdAsync(int id)
         {
-            return await _featureRulesRepository.GetByIdAsync(id);
+            var defaultRules = GetDefaultItem();
+            var featureRules = await _featureRulesRepository.GetByIdAsync(id);
+
+            featureRules.FeatureTaskRules.TitleVariables = defaultRules.FeatureTaskRules.TitleVariables;
+            featureRules.FeatureTaskRules.DefaultTags = CalculateDefaultTags(defaultRules.FeatureTaskRules.DefaultTags, featureRules.FeatureTaskRules.Tags);
+
+            featureRules.ZeroStoryRules.TitleVariables = defaultRules.ZeroStoryRules.TitleVariables;
+            featureRules.ZeroStoryRules.DefaultTags = CalculateDefaultTags(defaultRules.ZeroStoryRules.DefaultTags, featureRules.ZeroStoryRules.Tags);
+
+            featureRules.ZeroTaskRules.TitleVariables = defaultRules.ZeroTaskRules.TitleVariables;
+            featureRules.ZeroTaskRules.DefaultTags = CalculateDefaultTags(defaultRules.ZeroTaskRules.DefaultTags, featureRules.ZeroTaskRules.Tags);
+
+            featureRules.StoryRules.TitleVariables = defaultRules.StoryRules.TitleVariables;
+            featureRules.StoryRules.DefaultTags = CalculateDefaultTags(defaultRules.StoryRules.DefaultTags, featureRules.StoryRules.Tags);
+
+            featureRules.TaskRules.TitleVariables = defaultRules.TaskRules.TitleVariables;
+            featureRules.TaskRules.DefaultTags = CalculateDefaultTags(defaultRules.TaskRules.DefaultTags, featureRules.TaskRules.Tags);
+
+            return featureRules;
+        }
+
+        private string[] CalculateDefaultTags(string[] defaultTags, string[] savedTags)
+        {
+            if (defaultTags == null)
+            {
+                return null;
+            }
+
+            if (savedTags == null)
+            {
+                return null;
+            }
+
+            return defaultTags.Except(savedTags).ToArray();
         }
 
         public FeatureRules GetDefaultItem()

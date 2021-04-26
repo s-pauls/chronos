@@ -1,5 +1,6 @@
 using AutoMapper;
 using Chronos.App.Configurations;
+using Chronos.App.DataContracts.Comments;
 using Chronos.Core.RequestsOfWork;
 using FluentValidation.AspNetCore;
 using MediatR;
@@ -41,7 +42,7 @@ namespace Chronos.App
 
             services
                 .AddControllersWithViews()
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CommentForInputValidator>());
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
