@@ -1,6 +1,7 @@
 using AutoMapper;
 using Chronos.App.Configurations;
 using Chronos.App.DataContracts.Comments;
+using Chronos.App.Filters;
 using Chronos.Core.RequestsOfWork;
 using FluentValidation.AspNetCore;
 using MediatR;
@@ -8,12 +9,12 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Organization.WebApi.Client.Extensions;
 
 namespace Chronos.App
 {
@@ -41,8 +42,17 @@ namespace Chronos.App
             });
 
             services
-                .AddControllersWithViews()
+                .AddControllersWithViews(options =>
+                {
+                    options.Filters.Add(new HttpResponseExceptionFilter());
+                    options.Filters.Add(new HttpRequestModelStateFilter());
+                })
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CommentForInputValidator>());
+
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
