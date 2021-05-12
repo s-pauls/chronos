@@ -7,8 +7,8 @@ namespace Chronos.Domain.Interfaces
     {
         Task<AzureWorkItem> GetAzureWorkItemAsync(int id, AzureSettings settings);
 
-        Task<AzureWorkItem> CreateUserStoryAsync(AzureStory story, AzureSettings settings);
+        Task<AzureStory> CreateUserStoryAsync(AzureStory story, AzureSettings settings);
 
-        Task<AzureWorkItem> CreateTaskAsync(AzureTask task, AzureSettings settings);
+        Task<AzureTask> CreateTaskAsync(AzureTask task, AzureSettings settings);
     }
 }

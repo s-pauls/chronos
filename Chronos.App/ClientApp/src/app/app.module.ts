@@ -6,9 +6,11 @@ import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 import { QuillModule } from 'ngx-quill';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 import { AppComponent } from './app.component';
 import { AuthenticatedGuard } from './guard/authenticated.guard';
@@ -34,6 +36,8 @@ import { EstimateComponent } from './component/request-of-work/estimate/estimate
 import { FeatureDefinitionDocumentComponent } from './component/request-of-work/feature-definition-document/feature-definition-document.component';
 import { StatementOfWorkComponent } from './component/request-of-work/statement-of-work/statement-of-work.component';
 import { FixRequestComponent } from './component/request-of-work/fix-request/fix-request.component';
+import { FeatureComponent } from './component/feature/feature.component';
+import { AssigmentComponent } from './component/assigment/assigment.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +59,9 @@ import { FixRequestComponent } from './component/request-of-work/fix-request/fix
     EstimateComponent,
     FeatureDefinitionDocumentComponent,
     StatementOfWorkComponent,
-    FixRequestComponent
+    FixRequestComponent,
+    FeatureComponent,
+    AssigmentComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -94,7 +100,9 @@ import { FixRequestComponent } from './component/request-of-work/fix-request/fix
     NgxDatatableModule,
     TabsModule.forRoot(),
     TooltipModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    CollapseModule.forRoot(),
+    TypeaheadModule.forRoot()
   ],
   providers: [
     {

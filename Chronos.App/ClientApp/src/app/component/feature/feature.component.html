@@ -1,0 +1,150 @@
+<div class="modal-header">
+    <div class="d-flex flex-column w-100">
+        <div class="d-flex ml-auto">
+            <button type="button" class="btn btn-primary mr-2">Save as draft</button>
+            <button type="button" class="btn btn-primary">Sync with ADO</button>
+            <button type="button" class="close pull-right" (click)="bsModalRef.hide()">
+                <span>&times;</span>
+            </button>
+        </div>
+        <div class="d-flex align-items-baseline">
+            <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg"  width="19" height="19" fill="currentColor" viewBox="0 0 448 448">
+                    <path d="M145.619 384H128c-17.674 0-32 14.326-32 32v32h256v-32c0-17.674-14.327-32-32-32h-17.619c-7.434-36.47-39.75-64-78.381-64s-70.947 27.53-78.381 64zM224 352c20.832 0 38.425 13.418 45.053 32h-90.106c6.627-18.582 24.221-32 45.053-32zM352 64V32H96v32H32v80c0 40.051 29.686 73.018 68.153 78.8C114.003 278.531 163.984 320 224 320c60.016 0 109.997-41.469 123.846-97.2C386.313 217.018 416 184.051 416 144V64h-64zM96 189.053C77.417 182.426 64 164.832 64 144V96h32v93.053zM384 144c0 20.832-13.418 38.426-32 45.053V96h32v48z"/>
+                </svg>
+            </div>
+            <h4 class="modal-title ml-2 pull-left">{{ blankFeature.name }}</h4>
+        </div>
+    </div>
+</div>
+<div class="modal-body">
+    <div class="d-flex h-100 overflow-hidden">
+        <div class="w-100 h-100 overflow-hidden">
+            <div class="d-flex flex-column overflow-hidden h-100" *ngIf="blankFeature">
+                <div [ngClass]="isVisibleScroll ? 'margin-header' : ''" class="d-flex table-header border-bottom border-top">
+                    <div class="column name-header-column border-right">
+                        PBI Name
+                    </div>
+                    <div class="column hours-header-column border-right">
+                        Hours
+                    </div>
+                    <div class="column assigned-header-column">
+                        Assignment
+                    </div>
+                </div>
+                <div class="overflow-auto h-100" #tableContainer>
+                    <div class="d-flex align-items-center justify-content-end" *ngFor="let task of blankFeature.tasks">
+                        <div class="d-flex align-items-center column zero-task-column">
+                            <div class="task-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 448 448">
+                                    <path d="M320 64h-32c0-35.297-28.703-64-64-64s-64 28.703-64 64H64v384h320V64h-64zM128 96h64V64c0-17.641 14.359-32 32-32s32 14.359 32 32v32h64v32H128V96zm56 287.758l-79.844-79.828 31.688-31.688L184 320.414l128.156-128.172 31.688 31.688L184 383.758z"/>
+                                </svg>
+                            </div>
+                            <div class="flex-grow-1">
+                                <input [(ngModel)]="task.name" class="ml-1 name-input bg-transparent w-100" type="text"/>
+                            </div>
+                        </div>
+                        <div class="column hours-column">
+                            {{ task.originalEstimate }}
+                        </div>
+                        <div class="column assigned-column">
+                            <app-assigment [members]="members" (expandedListChanged)="onMembersExpanded($event)"></app-assigment>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="d-flex">
+                            <div class="d-flex align-items-center justify-content-end collapse-column">
+                                <div *ngIf="blankFeature.zeroStory.isCollapsed" (click)="onStoryisCollapsed(blankFeature.zeroStory)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                                        <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                                    </svg>
+                                </div>
+                                <div *ngIf="!blankFeature.zeroStory.isCollapsed" (click)="onStoryisCollapsed(blankFeature.zeroStory)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center column story-column">                          
+                                <div class="story-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 448 448">
+                                        <path d="M320 352c-22.846 0-60.713 5.861-80 16.588V55.635C257.752 40.563 296.084 32 320 32h64v320h-64zm-192 32H32V64H0v352h208s-16-32-80-32zM64 32v320h64c22.848 0 60.707 5.865 80 16.594V55.635C190.244 40.561 151.902 32 128 32H64zm352 32v320h-96c-64 0-80 32-80 32h208V64h-32z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <input [(ngModel)]="blankFeature.zeroStory.name" class="ml-1 name-input bg-transparent w-100" type="text"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div [collapse]="blankFeature.zeroStory.isCollapsed">
+                            <div class="d-flex justify-content-end" *ngFor="let task of blankFeature.zeroStory.tasks">
+                                <div class="d-flex align-items-center column task-column">
+                                    <div class="task-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 448 448">
+                                            <path d="M320 64h-32c0-35.297-28.703-64-64-64s-64 28.703-64 64H64v384h320V64h-64zM128 96h64V64c0-17.641 14.359-32 32-32s32 14.359 32 32v32h64v32H128V96zm56 287.758l-79.844-79.828 31.688-31.688L184 320.414l128.156-128.172 31.688 31.688L184 383.758z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <input [(ngModel)]="task.name" class="ml-1 name-input bg-transparent flex-grow-1" type="text"/>
+                                    </div>
+                                </div>
+                                <div class="column hours-column">
+                                    {{ task.originalEstimate }}
+                                </div>
+                                <div class="column assigned-column">
+                                    <app-assigment [members]="members" (expandedListChanged)="onMembersExpanded($event)"></app-assigment>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column" *ngFor="let story of blankFeature.stories">
+                        <div class="d-flex">
+                            <div class="d-flex align-items-center justify-content-end collapse-column">
+                                <div *ngIf="story.isCollapsed" (click)="onStoryisCollapsed(story)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                                        <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                                    </svg>
+                                </div>
+                                <div *ngIf="!story.isCollapsed" (click)="onStoryisCollapsed(story)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center column story-column">                          
+                                <div class="story-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 448 448">
+                                        <path d="M320 352c-22.846 0-60.713 5.861-80 16.588V55.635C257.752 40.563 296.084 32 320 32h64v320h-64zm-192 32H32V64H0v352h208s-16-32-80-32zM64 32v320h64c22.848 0 60.707 5.865 80 16.594V55.635C190.244 40.561 151.902 32 128 32H64zm352 32v320h-96c-64 0-80 32-80 32h208V64h-32z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <input [(ngModel)]="story.name" class="ml-1 name-input bg-transparent w-100" type="text"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div [collapse]="story.isCollapsed">
+                            <div class="d-flex justify-content-end" *ngFor="let task of story.tasks">
+                                <div class="d-flex align-items-center column task-column">
+                                    <div class="task-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 448 448">
+                                            <path d="M320 64h-32c0-35.297-28.703-64-64-64s-64 28.703-64 64H64v384h320V64h-64zM128 96h64V64c0-17.641 14.359-32 32-32s32 14.359 32 32v32h64v32H128V96zm56 287.758l-79.844-79.828 31.688-31.688L184 320.414l128.156-128.172 31.688 31.688L184 383.758z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <input [(ngModel)]="task.name" class="ml-1 name-input bg-transparent w-100" type="text"/>
+                                    </div>
+                                </div>
+                                <div class="column hours-column">
+                                    {{ task.originalEstimate }}
+                                </div>
+                                <div class="column assigned-column">
+                                    <app-assigment [members]="members" (expandedListChanged)="onMembersExpanded($event)"></app-assigment>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

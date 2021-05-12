@@ -1,0 +1,94 @@
+::ng-deep .modal-dialog {
+    min-width: 70%;
+}
+
+.modal-body {
+    height: 80vh;
+    padding: 0;
+}
+
+.modal-body > div {
+    border-bottom-left-radius: calc(.3rem - 1px);
+    border-bottom-right-radius: calc(.3rem - 1px);
+}
+
+.modal-header {
+    border-bottom: none;
+}
+
+.margin-header > .column:last-child {
+    margin-right: 1em;
+}
+
+.table-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: white;
+}
+
+.feature-icon {
+    color: purple;
+}
+
+.story-icon {
+    color: rgb(0, 156, 204);
+}
+
+.task-icon {
+    color: rgb(242, 203, 29);;
+}
+
+::ng-deep .flex-cell > div {
+    display: flex;
+    align-items: baseline;
+}
+
+.name-input {
+    border: none;
+    outline: none;
+}
+
+.column {
+    padding: .5rem;
+}
+
+.name-header-column {
+    flex-basis: 70%;
+}
+
+.hours-header-column {
+    text-align: center;
+    flex-basis: 10%;
+}
+
+.assigned-header-column {
+    text-align: center;
+    flex-basis: 20%;
+}
+
+.collapse-column {
+    flex-basis: 2%;
+    cursor: pointer;
+}
+
+.zero-task-column {
+    flex-basis: 68%;
+}
+
+.story-column {
+    flex-basis: 68%;
+}
+
+.task-column {
+    flex-basis: 66%;
+}
+
+.hours-column {
+    text-align: center;
+    flex-basis: 10%;
+}
+
+.assigned-column {
+    flex-basis: 20%;
+}

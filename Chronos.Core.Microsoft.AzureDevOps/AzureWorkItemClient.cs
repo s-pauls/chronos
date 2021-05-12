@@ -23,7 +23,7 @@ namespace Chronos.Core.Microsoft.AzureDevOps
             return workItem.ToAzureWorkItem();
         }
 
-        public async Task<AzureWorkItem> CreateUserStoryAsync(AzureStory story, AzureSettings settings)
+        public async Task<AzureStory> CreateUserStoryAsync(AzureStory story, AzureSettings settings)
         {
             var document = new JsonPatchDocumentBuilder()
                 .AddTitle(story.Title)
@@ -39,10 +39,10 @@ namespace Chronos.Core.Microsoft.AzureDevOps
 
             var workItem = await client.CreateWorkItemAsync(document, settings.ProjectName, AzureWorkItemTypesConstants.UserStory);
 
-            return workItem.ToAzureWorkItem();
+            return workItem.ToAzureStory();
         }
 
-        public async Task<AzureWorkItem> CreateTaskAsync(AzureTask task, AzureSettings settings)
+        public async Task<AzureTask> CreateTaskAsync(AzureTask task, AzureSettings settings)
         {
             var document = new JsonPatchDocumentBuilder()
                 .AddTitle(task.Title)
@@ -60,7 +60,7 @@ namespace Chronos.Core.Microsoft.AzureDevOps
 
             var workItem = await client.CreateWorkItemAsync(document, settings.ProjectName, AzureWorkItemTypesConstants.Task);
 
-            return workItem.ToAzureWorkItem();
+            return workItem.ToAzureTask();
         }
 
         private WorkItemTrackingHttpClient CreateClient(AzureSettings settings)

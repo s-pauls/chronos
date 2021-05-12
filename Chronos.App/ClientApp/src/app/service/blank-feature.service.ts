@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Product } from '../models/product';
+import { BlankFeature } from '../models';
 import { AppConfigService } from './app-config.service';
 import { ChronosHttpClientService } from './chronos-http-client.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class BlankFeatureService {
   private apiUrl = '';
 
   constructor(private config: AppConfigService,
-              private httpClient: ChronosHttpClientService) {
-    this.apiUrl = `${config.getData('apiEndpoint')}/products`;
+    private httpClient: ChronosHttpClientService) {
+      this.apiUrl = `${config.getData('apiEndpoint')}/blank-features`;
   }
 
-  getProducts(): Observable<Product[]> {
-    return this.httpClient.get(this.apiUrl);
+  get(id: number): Observable<BlankFeature> {
+    return this.httpClient.get(`${this.apiUrl}/${id}`);
   }
 }

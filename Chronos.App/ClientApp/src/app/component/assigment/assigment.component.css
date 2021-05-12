@@ -1,0 +1,46 @@
+.input-dropdown {
+    position: relative;
+}
+
+.input-dropdown input {
+    width: 100%;
+    font-size: .875rem;
+    padding-right: 1.6em;
+}
+
+.input-icon {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    right: 0.3em;
+}
+
+.input-dropdown ul {
+    list-style: none;
+    position: absolute;
+    padding: .5rem 0;
+    margin: .025rem 0 0;
+    font-size: .875rem;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+    height: 15rem;
+    overflow: auto;
+    z-index: 1000;
+    width: 100%;
+}
+
+.input-dropdown ul > li {
+    cursor: pointer;
+    padding: 0.4em;
+    font-size: .875rem;
+}
+
+.input-dropdown ul > li:hover {
+    background: gainsboro;
+}
+
+.up {
+    transform: translateY(-116%);
+}
+  

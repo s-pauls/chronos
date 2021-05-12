@@ -5,6 +5,7 @@ import { forkJoin, Subject } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { CheckedItem, CommentModel, Estimate, Filter, Product, RequestOfWork, RequestOfWorkFilter } from 'src/app/models';
 import { ProductService, RequestOfWorkService, RequestsOfWorkCommentsService, RequestsOfWorkEstimatesService } from 'src/app/service';
+import { FeatureComponent } from '../../feature/feature.component';
 import { EstimateComponent } from '../estimate/estimate.component';
 import { FeatureDefinitionDocumentComponent } from '../feature-definition-document/feature-definition-document.component';
 import { FixRequestComponent } from '../fix-request/fix-request.component';
@@ -99,7 +100,7 @@ export class RequestsOfWorkComponent implements OnInit, OnDestroy {
       var message = textarea.value;
       textarea.value = null;     
       textarea.blur();
-      this.getSelectedRequestOfWorkId()
+      this.getSelectedRequestOfWorkId();
 
       this.requestsOfWorkCommentsService
         .add(this.selectedRequestOfWork[0].requestOfWorkId, message)
@@ -117,6 +118,14 @@ export class RequestsOfWorkComponent implements OnInit, OnDestroy {
     };
 
     this.showModal(EstimateComponent, () => this.loadEstimatesAndComments(), initialState);
+  }
+
+  onOpenFeature(): void {
+    let initialState = {
+      featureId: 1
+    };
+
+    this.showModal(FeatureComponent, () => { }, initialState);
   }
 
   //todo
@@ -143,7 +152,7 @@ export class RequestsOfWorkComponent implements OnInit, OnDestroy {
   private showModal<T = Object>(component: { new (...args: any[]): T; }, onSuccess: () => void, initialState?: Partial<T>): void {    
     let config = {
       animated: false,
-      class: 'message-box modal-dialog-centered',
+      class: 'message-box modal-dialog-centered modal-lg',
       initialState: initialState  
     };
 
@@ -151,7 +160,6 @@ export class RequestsOfWorkComponent implements OnInit, OnDestroy {
     this.bsModalRef.onHide
       .pipe(takeUntil(this.destroy))
       .subscribe((result) => {
-        console.log(result);
         if (result && result.success) {
           onSuccess();
         }
