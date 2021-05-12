@@ -69,18 +69,35 @@
                                     <div class="d-flex justify-content-end mb-2">
                                         <button class="btn btn-primary" type="button" (click)="onAddEstimate()">Add</button>
                                             </div>
-                                    <div class="h-100">                                        
+                                    <div class="h-100 table-padding">                                        
                                         <ngx-datatable
                                             class="material h-100"
                                             [rows]="estimates"
                                             [columnMode]="columnMode.force"
                                             [headerHeight]="50"
-                                            [rowHeight]="35"
+                                            [rowHeight]="50"
                                             [footerHeight]="0"
                                             [rowClass]="getRowClass"
                                             [scrollbarV]="true">
-                                            <ngx-datatable-column name="Version" prop="version"></ngx-datatable-column>
-                                            <ngx-datatable-column name="Grand Total" prop="grandTotal" ></ngx-datatable-column>
+                                            <ngx-datatable-column name="Version" prop="version" cellClass="cell-padding">
+                                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                                    <div class="d-flex align-items-center h-100">
+                                                        {{ row.version }}
+                                                    </div>
+                                                </ng-template>
+                                            </ngx-datatable-column>
+                                            <ngx-datatable-column name="Grand Total" prop="grandTotal" cellClass="cell-padding">
+                                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                                    <div class="d-flex align-items-center h-100">
+                                                        <div class="m-auto w-100">
+                                                            {{ row.grandTotal }}
+                                                        </div>
+                                                        <div class="ml-auto">
+                                                            <button type="button" class="btn btn-primary table-button" (click)="onGenerateFeature(row.estimateId)">Generate</button>
+                                                        </div>
+                                                    </div>   
+                                                </ng-template>
+                                            </ngx-datatable-column>
                                         </ngx-datatable>
                                     </div>
                                 </div>

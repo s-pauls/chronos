@@ -1,9 +1,8 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ColumnMode, } from '@swimlane/ngx-datatable';
+import { ChangeDetectorRef, Component, DoCheck, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { BlankFeature, BlankStory, Member } from 'src/app/models';
+import { BlankFeature, BlankStory, BlankTask, Member } from 'src/app/models';
 import { MemberService } from 'src/app/service';
 import { BlankFeatureService } from 'src/app/service/blank-feature.service';
 
@@ -12,16 +11,16 @@ import { BlankFeatureService } from 'src/app/service/blank-feature.service';
   templateUrl: './feature.component.html',
   styleUrls: ['./feature.component.css']
 })
-export class FeatureComponent implements OnInit {
+export class FeatureComponent implements OnInit, OnChanges, DoCheck {
   private destroy: Subject<void> = new Subject<void>();
   private oldScrollHeight = 0;
+  private oldScrollWidth = 0;
 
   @ViewChild('tableContainer') container:ElementRef<HTMLDivElement>;
 
   isVisibleScroll = false;
 
-  featureId = 0; 
-  columnMode = ColumnMode;
+  featureId = 0;
 
   blankFeature: BlankFeature = null;
   members: Member[] = [];
@@ -33,9 +32,21 @@ export class FeatureComponent implements OnInit {
     private changeDetector: ChangeDetectorRef
   ) { }
 
+  ngDoCheck(): void {
+    if (this.container) {
+      this.oldScrollHeight = this.container.nativeElement.scrollHeight;
+      this.oldScrollWidth = this.container.nativeElement.scrollWidth;
+    }
+  }
+
   ngOnInit(): void {
+    this.bsModalRef.setClass('modal-large');
     this.initBlankFeature();
     this.initMembers();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
   }
 
   onStoryisCollapsed(story: BlankStory): void {
@@ -45,10 +56,6 @@ export class FeatureComponent implements OnInit {
 
   onMembersExpanded(event: any): void {
     let element = this.container.nativeElement;
-
-    if (this.oldScrollHeight === 0) {
-      this.oldScrollHeight = element.scrollHeight;
-    }
 
     event.dropup = false;
 
@@ -61,17 +68,35 @@ export class FeatureComponent implements OnInit {
     }
   }
 
-  private checkExpandedScroll(): void {
-    this.changeDetector.detectChanges();
+  onTagsExpanded(event: any): void {
     let element = this.container.nativeElement;
 
-    if (element.scrollHeight - element.offsetHeight > 0) {
+    event.dropup = false;
+    event.dropright = false;
+
+    this.changeDetector.detectChanges();
+
+    if (element.scrollHeight - this.oldScrollHeight - event.changedHeight  > 0) {
+      event.dropup = true;
+    } else {
+      event.dropup = false;
+    }
+
+    if (element.scrollWidth - this.oldScrollWidth  > 0) {
+      event.dropright = true;
+    } else {
+      event.dropright = false;
+    }
+  }
+
+  private checkExpandedScroll(): void {
+    this.changeDetector.detectChanges();
+
+    if (this.container.nativeElement.scrollHeight - this.container.nativeElement.offsetHeight > 0) {
       this.isVisibleScroll = true;
     } else {
       this.isVisibleScroll = false;
     }
-
-    this.oldScrollHeight = element.scrollHeight;
   }
 
   private initBlankFeature() {

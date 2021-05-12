@@ -120,9 +120,9 @@ export class RequestsOfWorkComponent implements OnInit, OnDestroy {
     this.showModal(EstimateComponent, () => this.loadEstimatesAndComments(), initialState);
   }
 
-  onOpenFeature(): void {
+  onGenerateFeature(id: number): void {
     let initialState = {
-      featureId: 1
+      featureId: id
     };
 
     this.showModal(FeatureComponent, () => { }, initialState);
@@ -131,7 +131,7 @@ export class RequestsOfWorkComponent implements OnInit, OnDestroy {
   //todo
   getDate(date: string): Date {
     return new Date(date);
-    }
+  }
 
   //todo
   getDayOfWeek(date: string): string {
@@ -151,8 +151,8 @@ export class RequestsOfWorkComponent implements OnInit, OnDestroy {
 
   private showModal<T = Object>(component: { new (...args: any[]): T; }, onSuccess: () => void, initialState?: Partial<T>): void {    
     let config = {
-      animated: false,
-      class: 'message-box modal-dialog-centered modal-lg',
+      animated: true,
+      class: 'message-box modal-dialog-centered',
       initialState: initialState  
     };
 

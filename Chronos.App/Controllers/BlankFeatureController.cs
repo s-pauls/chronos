@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Chronos.App.DataContracts;
@@ -30,19 +31,55 @@ namespace Chronos.App.Controllers
                     {
                         Activity = "Some FeatureTask Activity 1",
                         Name = "Some FeatureTask Name 1",
-                        OriginalEstimate = 1
+                        OriginalEstimate = 1,
+                        Tags = new List<string> 
+                        { 
+                            "2021",
+                            "CDB",
+                            "CSI"
+                        },
+                        SuggestedTags = new List<string> 
+                        { 
+                            DateTime.Now.Year.ToString(),
+                            "CDB",
+                            "Some Team"
+                        }
                     },
                     new()
                     {
                         Activity = "Some FeatureTask Activity 2",
                         Name = "Some FeatureTask Name 2",
-                        OriginalEstimate = 2
+                        OriginalEstimate = 2,
+                        Tags = new List<string>
+                        {
+                            "2021",
+                            "CDB",
+                            "CSI"
+                        },
+                        SuggestedTags = new List<string>
+                        {
+                            DateTime.Now.Year.ToString(),
+                            "CDB",
+                            "Some Team"
+                        }
                     },
                     new()
                     {
                         Activity = "Some FeatureTask Activity 3",
                         Name = "Some FeatureTask Name 3",
-                        OriginalEstimate = 3
+                        OriginalEstimate = 3,
+                        Tags = new List<string>
+                        {
+                            "2021",
+                            "CDB",
+                            "CSI"
+                        },
+                        SuggestedTags = new List<string>
+                        {
+                            DateTime.Now.Year.ToString(),
+                            "CDB",
+                            "Some Team"
+                        }
                     }
                 },
                 ZeroStory = new ApiContract.BlankStory
@@ -54,21 +91,21 @@ namespace Chronos.App.Controllers
                     {
                         new()
                         {
-                            ParentStoryId = 1,
+                            TaskId = 1,
                             Activity = "Some ZeroTask Activity 1",
                             Name = "Some ZeroTask Name 1",
                             OriginalEstimate = 1
                         },
                         new()
                         {
-                            ParentStoryId = 1,
+                            TaskId = 2,
                             Activity = "Some ZeroTask Activity 2",
                             Name = "Some ZeroTask Name 2",
                             OriginalEstimate = 2
                         },
                         new()
                         {
-                            ParentStoryId = 1,
+                            TaskId = 3,
                             Activity = "Some ZeroTask Activity 3",
                             Name = "Some ZeroTask Name 3",
                             OriginalEstimate = 3
@@ -86,21 +123,21 @@ namespace Chronos.App.Controllers
                         {
                             new()
                             {
-                                ParentStoryId = 2,
+                                TaskId = 4,
                                 Activity = "Some Task Activity 1",
                                 Name = "Some Task Name 1",
                                 OriginalEstimate = 1
                             },
                             new()
                             {
-                                ParentStoryId = 2,
+                                TaskId = 5,
                                 Activity = "Some Task Activity 2",
                                 Name = "Some Task Name 2",
                                 OriginalEstimate = 2
                             },
                             new()
                             {
-                                ParentStoryId = 2,
+                                TaskId = 6,
                                 Activity = "Some Task Activity 3",
                                 Name = "Some Task Name 3",
                                 OriginalEstimate = 3
@@ -116,24 +153,43 @@ namespace Chronos.App.Controllers
                         {
                             new()
                             {
-                                ParentStoryId = 3,
+                                TaskId = 7,
                                 Activity = "Some Task Activity 4",
                                 Name = "Some Task Name 4",
                                 OriginalEstimate = 4
                             },
                             new()
                             {
-                                ParentStoryId = 3,
+                                TaskId = 8,
                                 Activity = "Some Task Activity 5",
                                 Name = "Some Task Name 5",
                                 OriginalEstimate = 5
                             },
                             new()
                             {
-                                ParentStoryId = 3,
+                                TaskId = 9,
                                 Activity = "Some Task Activity 6",
                                 Name = "Some Task Name 6",
                                 OriginalEstimate = 6
+                            },
+                            new()
+                            {
+                                TaskId = 10,
+                                Activity = "Some Task Activity 7",
+                                Name = "Some Task Name 7",
+                                OriginalEstimate = 256,
+                                Tags = new List<string>
+                                {
+                                    "2021",
+                                    "CDB",
+                                    "CSI"
+                                },
+                                SuggestedTags = new List<string>
+                                {
+                                    DateTime.Now.Year.ToString(),
+                                    "CDB",
+                                    "Some Team"
+                                }
                             }
                         }
                     }

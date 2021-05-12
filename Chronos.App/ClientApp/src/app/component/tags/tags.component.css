@@ -1,10 +1,67 @@
-.tag {
-    background-color: lightgreen;
-    padding: .375rem .375rem;
+.tags {
+    font-size: .875rem;
+}
+
+.tag-container, .tag-input {
+    cursor: default;
+    background-color: aliceblue;
+    min-height: 1.8em;
+}
+
+.tag-container > div {
+    padding: .125rem .2rem;
+}
+
+.selectable {
+    cursor: pointer;
+}
+
+.selectable:hover {
+    background-color: lightblue;
+}
+
+.selectable > svg {
+    opacity: 0.6;
+}
+
+.tag-input-container {
+    position: relative;
+}
+
+.tag-input {
+    outline: none;
+    max-width: 7rem;
     border: 1px solid;
-    border-radius: .25rem;
+}
+
+ul {
+    list-style: none;
+    position: absolute;
+    padding: .5rem 0;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.15);
+    max-height: 10rem;
+    overflow: auto;
+    z-index: 1000;
+    width: 100%;
+    overflow-x: hidden;
+    min-width: 8rem;
 }
 
 ul > li {
     cursor: pointer;
+    padding: 0.2em 0.4em;
+}
+
+ul > li:hover {
+    background: lightblue;
+}
+
+.up {
+    transform: translateY(-100%);
+    top: 0;
+}
+
+.right {
+    right: 0;
 }

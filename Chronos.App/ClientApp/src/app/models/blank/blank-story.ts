@@ -1,4 +1,4 @@
-import { User } from "src/app/service";
+import { Member } from "../member/member";
 import { BlankTask } from "./blank-task";
 
 export class BlankStory {
@@ -6,7 +6,9 @@ export class BlankStory {
     name = '';
     tasks: BlankTask[] = null;
     orderNumber = 0;
-    assigned: User = null;
+    assigned: Member = null;
+    tags: string[] = null;
+    suggestedTags: string[] = null;
     isCollapsed = true;
 
     constructor(obj?: Partial<BlankStory>) {

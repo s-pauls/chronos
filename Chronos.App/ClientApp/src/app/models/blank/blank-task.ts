@@ -1,10 +1,11 @@
-import { User } from "src/app/service";
+import { Member } from "../member/member";
 
 export class BlankTask {
-    parentStoryId: 0 ;
     name = '';
     originalEstimate = 0;
-    assigned: User = null;
+    tags: string[] = null;
+    suggestedTags: string[] = null;
+    assigned: Member = null;
     activity = '';
 
     constructor(obj?: Partial<BlankTask>) {

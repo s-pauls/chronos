@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, map, switchMap, takeUntil } from 'rxjs/operators';
 import { Member, MemberQuery } from 'src/app/models';
@@ -18,14 +18,15 @@ export class AssigmentComponent implements OnInit {
     this.addUnassinged(this.membersList);
     this.filteredMembers = [...this.membersList];
   }
-
+  @Input() member: Member = null;
   @Input() set dropup(value: boolean) {
     this.state.dropup = value;
   };
   
-  @Output() selectionMember: EventEmitter<Member> = new EventEmitter();
+  @Output() memberChange: EventEmitter<Member> = new EventEmitter();
+  @Output() expand: EventEmitter<Object> = new EventEmitter();
 
-  @Output() expandedListChanged: EventEmitter<Object> = new EventEmitter();
+  @ViewChild('inputDropdown') inputDropdown: ElementRef<HTMLDivElement>;
 
   state = {
     dropup: false
@@ -33,7 +34,6 @@ export class AssigmentComponent implements OnInit {
 
   dropdownVisible = false;
 
-  selectedMember: Member = null;
   searchText: string;
   membersObservable: Observable<Member[]>;
 
@@ -52,20 +52,25 @@ export class AssigmentComponent implements OnInit {
     this.searchSubject.next();
   }
 
-  onFocus(): void {
+  onInputClick(): void {
     this.dropdownVisible = true;
-    this.expandedListChanged.emit(this.state);
+    this.inputDropdown.nativeElement.getElementsByTagName('input')[0].focus();
+
+    this.expand.emit(this.state);
   }
 
-  onBlure(): void {
+  onFocusout(event: FocusEvent): void {
+    if (event.target && !this.inputDropdown.nativeElement.contains(<HTMLElement> event.relatedTarget)) {
     this.dropdownVisible = false;
+  }
   }
 
   onSelectItem(index: number): void {
-    this.selectedMember = this.filteredMembers[index];
-    this.searchText = `${this.selectedMember.firstName} ${this.selectedMember.lastName}`;
+    this.member = this.filteredMembers[index];
+    this.searchText = `${this.member.firstName} ${this.member.lastName}`;
     this.dropdownVisible = false;
     this.filteredMembers = [...this.membersList];
+    this.memberChange.emit(this.member);
   }
 
   initSearchSubject(): void {
@@ -88,7 +93,7 @@ export class AssigmentComponent implements OnInit {
     .pipe(takeUntil(this.destroy))
     .subscribe((result) => {
       this.filteredMembers = result;
-      this.expandedListChanged.emit(this.state);
+      this.expand.emit(this.state);
     });
   }
 

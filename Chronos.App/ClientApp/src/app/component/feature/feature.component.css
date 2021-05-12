@@ -1,5 +1,5 @@
-::ng-deep .modal-dialog {
-    min-width: 70%;
+::ng-deep .modal-large {
+    max-width: 80%;
 }
 
 .modal-body {
@@ -54,17 +54,22 @@
 }
 
 .name-header-column {
-    flex-basis: 70%;
+    flex-basis: 50%;
 }
 
 .hours-header-column {
     text-align: center;
-    flex-basis: 10%;
+    flex-basis: 7%;
 }
 
-.assigned-header-column {
+.assignment-header-column {
     text-align: center;
     flex-basis: 20%;
+}
+
+.tags-header-column {
+    text-align: center;
+    flex-basis: 23%;
 }
 
 .collapse-column {
@@ -73,22 +78,26 @@
 }
 
 .zero-task-column {
-    flex-basis: 68%;
+    flex-basis: 48%;
 }
 
 .story-column {
-    flex-basis: 68%;
+    flex-basis: 48%;
 }
 
 .task-column {
-    flex-basis: 66%;
+    flex-basis: 46%;
 }
 
 .hours-column {
     text-align: center;
-    flex-basis: 10%;
+    flex-basis: 7%;
 }
 
-.assigned-column {
+.assignment-column {
     flex-basis: 20%;
+}
+
+.tags-column {
+    flex-basis: 23%;
 }

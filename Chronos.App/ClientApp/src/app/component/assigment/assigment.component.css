@@ -1,11 +1,14 @@
 .input-dropdown {
     position: relative;
+    max-width: 15em;
+    margin: auto;
 }
 
 .input-dropdown input {
     width: 100%;
     font-size: .875rem;
     padding-right: 1.6em;
+    height: calc(1.2em + .75rem + 2px);
 }
 
 .input-icon {
@@ -24,10 +27,11 @@
     background-color: #fff;
     border: 1px solid rgba(0,0,0,.15);
     border-radius: .25rem;
-    height: 15rem;
+    max-height: 15rem;
     overflow: auto;
     z-index: 1000;
     width: 100%;
+    overflow-x: hidden;
 }
 
 .input-dropdown ul > li {
@@ -41,6 +45,12 @@
 }
 
 .up {
-    transform: translateY(-116%);
+    margin: -.2rem 0 0;
+    transform: translateY(-100%);
+    top: 0;
+}
+
+.down {
+    margin: .2rem 0 0;
 }
   
