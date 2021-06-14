@@ -1,5 +1,6 @@
 ﻿using Chronos.Core;
 using Chronos.Core.Estimates;
+using Chronos.Core.EstimateTemplates;
 using Chronos.Data;
 using Chronos.Data.EntityFramework;
 using Chronos.Data.EntityFramework.Repositories;

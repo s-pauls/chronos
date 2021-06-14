@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AutoMapper;
 using Chronos.App.DataContracts;
 using Chronos.Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using ApiContract = Chronos.App.DataContracts.Estimates;
+using Microsoft.AspNetCore.Mvc;
+using DomainModels = Chronos.Domain.Entities.EstimateTemplates;
+using ApiContract = Chronos.App.DataContracts.EstimateTemplates;
 
 namespace Chronos.App.Controllers
 {
@@ -26,11 +26,27 @@ namespace Chronos.App.Controllers
         }
 
         [HttpGet]
-        public async Task<ApiListResponse<ApiContract.EstimateTemplate>> GetListAsync()
+        public async Task<ApiListResponse<ApiContract.EstimateTemplateWithId>> GetListAsync()
         {
             var list = await _estimateTemplateService.GetListAsync();
-            var apiData = _mapper.Map<ApiContract.EstimateTemplate[]>(list);
-            return new ApiListResponse<ApiContract.EstimateTemplate>(apiData);
+            var apiData = _mapper.Map<ApiContract.EstimateTemplateWithId[]>(list);
+            return new ApiListResponse<ApiContract.EstimateTemplateWithId>(apiData);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ApiResponse<ApiContract.EstimateTemplateWithId>> GetItemByIdAsync(int id)
+        {
+            var item = await _estimateTemplateService.GetByIdAsync(id);
+            var apiData = _mapper.Map<ApiContract.EstimateTemplateWithId>(item);
+            return new ApiResponse<ApiContract.EstimateTemplateWithId>(apiData);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PostAsync([FromBody] ApiContract.EstimateTemplate featureRules)
+        {
+            var model = _mapper.Map<DomainModels.EstimateTemplate>(featureRules);
+            await _estimateTemplateService.AddAsync(model);
+            return NoContent();
         }
     }
 }
